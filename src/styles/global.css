@@ -6,7 +6,7 @@
 :root {
   --blue: #6ec1e4; /* section headings, the light blue from the WordPress site */
   --link: #0170b9; /* links and menu */
-  --text: #626262; /* body text (live site: #7a7a7a, darkened to be readable) */
+  --text: #757575; /* body text (the WordPress grey #7a7a7a, a hair darker so it passes contrast on white) */
   --dark: #3a3a3a; /* dark headings */
   --body: #4b4f58; /* site title, captions */
   --green: #267f36; /* buttons (live site: #61ce70, darkened so white text reads) */
