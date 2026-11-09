@@ -4,7 +4,7 @@
  * with a soft shadow, grey bands, and a grey page behind blog posts.
  */
 :root {
-  --blue: #136c99; /* section headings (live site: #6ec1e4, darkened to be readable) */
+  --blue: #6ec1e4; /* section headings, the light blue from the WordPress site */
   --link: #0170b9; /* links and menu */
   --text: #626262; /* body text (live site: #7a7a7a, darkened to be readable) */
   --dark: #3a3a3a; /* dark headings */
