@@ -1,15 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
-const form = 'https://docs.google.com/forms/d/e/1FAIpQLSfIZqINlLIDGSFfDcNPbGcEIHsv_vbBk474IUvNR20OxUyVfA/viewform';
 ---
 
-<Base title="Reservation Form" description="Request a handcycle reservation with Able Bodied Inc.">
+<Base title="Reservation Form">
   <section class="section">
-    <div class="narrow">
-      <h1>Reserve a handcycle</h1>
-      <p class="lead">Fill in the form below and we’ll follow up with the next steps. If it doesn’t load, <a href={form}>open the form in a new page</a>.</p>
+    <div class="wrap">
+      <h1 class="visually-hidden">Reservation Form</h1>
       <div class="embed">
-        <iframe src={`${form}?embedded=true`} title="Handcycle reservation form" loading="lazy"></iframe>
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfIZqINlLIDGSFfDcNPbGcEIHsv_vbBk474IUvNR20OxUyVfA/viewform?embedded=true"
+          title="Reservation form"
+          loading="lazy"></iframe>
       </div>
     </div>
   </section>

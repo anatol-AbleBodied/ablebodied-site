@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+---
+
+<Base title="Go 49ers" image="/wp-content/uploads/2026/10/go49ers-flyer.png">
+  <section class="section">
+    <div class="wrap">
+      <h1 class="visually-hidden">Go 49ers</h1>
+      <Pic src="/wp-content/uploads/2026/10/go49ers-flyer.png" alt="Go 49ers event flyer" sizes="(min-width: 831px) 791px, 100vw" eager class="flyer" />
+      <div class="btn-wrap"><a class="btn" href="http://tinyurl.com/sci49ers">RSVP HERE</a></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(.flyer) {
+    margin: 0 auto 20px;
+    max-width: 791px;
+    width: 100%;
+  }
+</style>

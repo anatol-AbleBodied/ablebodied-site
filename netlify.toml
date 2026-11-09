@@ -12,9 +12,15 @@
   status = 301
 
 [[redirects]]
-  from = "/2022/07/25/how-to-build-an-e-bike-handcycle%EF%BF%BC/"
-  to = "/2022/07/25/how-to-build-an-e-bike-handcycle/"
+  from = "/2022/10/13/china-bike/"
+  to = "/2022/10/13/bafang-front-wheel-handcycle/"
   status = 301
+
+# Short link to Wojtek's booking calendar (same as the WordPress site).
+[[redirects]]
+  from = "/meetwithwojtek/"
+  to = "https://calendar.app.google/H19MGHhiRnZwkM5J7"
+  status = 302
 
 [[redirects]]
   from = "/Blog/"

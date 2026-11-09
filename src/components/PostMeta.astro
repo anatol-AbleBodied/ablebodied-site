@@ -1,0 +1,25 @@
+---
+import { CATEGORIES, CATEGORY_PAGES, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { categories, author } = Astro.props.post.data;
+const shown = categories.filter((c) => CATEGORIES[c]);
+---
+
+{
+  (shown.length > 0 || author) && (
+    <div class="entry-meta">
+      {shown.map((c, i) => (
+        <>
+          {i > 0 && ', '}
+          {CATEGORY_PAGES.includes(c) ? <a href={`/category/${c}/`}>{CATEGORIES[c]}</a> : <span>{CATEGORIES[c]}</span>}
+        </>
+      ))}
+      {shown.length > 0 && author && ' / '}
+      {author && <span>By {author}</span>}
+    </div>
+  )
+}

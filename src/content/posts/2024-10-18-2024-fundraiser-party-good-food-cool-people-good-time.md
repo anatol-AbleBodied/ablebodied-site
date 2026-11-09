@@ -1,6 +1,7 @@
 ---
 title: "Join us for Able Bodied’s first ever fundraiser!"
 date: 2024-10-18
+author: "Anatol Poppe"
 slug: "2024-fundraiser-party-good-food-cool-people-good-time"
 categories: ["events"]
 cover: "/wp-content/uploads/2024/10/Screenshot-2024-11-09-at-7.17.20-PM.png"

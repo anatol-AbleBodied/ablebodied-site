@@ -1,6 +1,7 @@
 ---
 title: "Help recently paralyzed father handcycle across Iowa"
 date: 2025-06-27
+author: "Wojtek Poppe"
 slug: "help-recently-paralyzed-father-handcycle-across-iowa"
 categories: ["uncategorized"]
 cover: "/wp-content/uploads/2025/06/Screenshot-2025-06-26-at-9.25.25-PM-Medium.jpeg"

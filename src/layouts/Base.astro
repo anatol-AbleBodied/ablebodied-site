@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/roboto/index.css';
 import '../styles/global.css';
 import { SITE } from '../lib/site';
 
@@ -11,17 +12,17 @@ interface Props {
 }
 
 const { title, description = SITE.description, image = SITE.shareImage, type = 'website' } = Astro.props;
-const fullTitle = title ? `${title} – ${SITE.name}` : `${SITE.name} – ${SITE.tagline}`;
+const fullTitle = title ? `${title} – ${SITE.name}` : `${SITE.name} – ${SITE.homeTitle}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const shareImage = new URL(image, Astro.site);
-const path = Astro.url.pathname;
+const year = new Date().getFullYear();
 
 const nav = [
-  { href: '/#lessons', label: 'Free lessons' },
-  { href: '/#get1help2', label: 'Get 1 Help 2' },
-  { href: '/borp/', label: 'Group rides' },
-  { href: '/blog/', label: 'News' },
-  { href: '/board-of-directors/', label: 'Our team' },
+  { href: '/#services', label: 'Lessons' },
+  { href: '/#Get1Help2', label: 'Get1Help2' },
+  { href: SITE.wiki, label: 'Able Bodied Wiki' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/donate/', label: 'DONATE' },
 ];
 ---
 
@@ -35,7 +36,6 @@ const nav = [
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="theme-color" content="#1f5a43" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title ?? SITE.name} />
@@ -43,30 +43,22 @@ const nav = [
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} news`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     <slot name="head" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
-      <div class="wrap bar">
-        <a href="/" class="logo" aria-label={`${SITE.name} home`}>
+      <div class="bar">
+        <a href="/" class="brand" rel="home">
           <img src="/logo.jpg" alt="" width="180" height="62" />
+          <span class="site-title">{SITE.name}</span>
         </a>
         <details class="menu">
-          <summary><span class="visually-hidden">Menu</span><span aria-hidden="true" class="burger"></span></summary>
+          <summary aria-label="Main menu"><span class="burger" aria-hidden="true"></span></summary>
           <nav aria-label="Main">
             <ul>
-              {
-                nav.map((item) => (
-                  <li>
-                    <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
-                      {item.label}
-                    </a>
-                  </li>
-                ))
-              }
-              <li><a class="btn accent" href="/donate/">Donate</a></li>
+              {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
             </ul>
           </nav>
         </details>
@@ -78,47 +70,15 @@ const nav = [
     </main>
 
     <footer class="site-footer">
-      <div class="wrap foot">
-        <div>
-          <p class="foot-name">{SITE.name}</p>
-          <p>“Able bodied” experiences for all: free electric-assist handcycling lessons, mentoring and open resources.</p>
-          <p>
-            <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
-            San Jose and Sebastopol, CA · by appointment only
-          </p>
-        </div>
-        <div>
-          <p class="foot-name">Follow us</p>
-          <ul class="foot-links">
-            {SITE.social.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
-          </ul>
-        </div>
-        <div>
-          <p class="foot-name">More</p>
-          <ul class="foot-links">
-            <li><a href="/donate/">Donate</a></li>
-            <li><a href="/reserve/">Reserve a handcycle</a></li>
-            <li><a href={SITE.wiki}>Handcycle wiki</a></li>
-            <li><a href="/privacy-policy/">Privacy policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="wrap legal">
-        <p>
-          {SITE.name} is a nonprofit, tax-exempt charitable organization (tax ID {SITE.ein}) under Section 501(c)(3)
-          of the Internal Revenue Code. Donations are tax-deductible as allowed by law.
-        </p>
-      </div>
+      <p>Copyright © {year} {SITE.name}</p>
     </footer>
   </body>
 </html>
 
 <style>
   .site-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
+    background: #fff;
+    position: relative;
     z-index: 50;
   }
   .bar {
@@ -126,23 +86,47 @@ const nav = [
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    min-height: 72px;
+    min-height: 93px;
+    width: min(100% - 40px, 1200px);
+    margin-inline: auto;
   }
-  .logo img {
-    height: 48px;
-    width: auto;
-    background: #fff;
-    border-radius: 8px;
-    padding: 2px 6px;
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+  }
+  .brand img {
+    width: 180px;
+    height: auto;
+  }
+  .site-title {
+    font-family: var(--system);
+    font-size: 35px;
+    font-weight: 600;
+    color: var(--body);
+    white-space: nowrap;
+  }
+  @media (max-width: 921px) {
+    .brand img {
+      width: 120px;
+    }
+    .site-title {
+      font-size: 24px;
+    }
+  }
+  @media (max-width: 480px) {
+    .site-title {
+      display: none;
+    }
   }
   .menu summary {
     list-style: none;
     cursor: pointer;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
-    border-radius: 10px;
   }
   .menu summary::-webkit-details-marker {
     display: none;
@@ -151,10 +135,9 @@ const nav = [
   .burger::before,
   .burger::after {
     display: block;
-    width: 24px;
-    height: 2.5px;
-    background: var(--ink);
-    border-radius: 2px;
+    width: 20px;
+    height: 2px;
+    background: var(--link);
     position: relative;
   }
   .burger::before,
@@ -163,10 +146,10 @@ const nav = [
     position: absolute;
   }
   .burger::before {
-    top: -7px;
+    top: -6px;
   }
   .burger::after {
-    top: 7px;
+    top: 6px;
   }
   .menu[open] .burger {
     background: transparent;
@@ -184,108 +167,65 @@ const nav = [
     left: 0;
     right: 0;
     top: 100%;
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    background: #fff;
+    border-top: 1px solid #eaeaea;
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.08);
   }
   .menu ul {
     list-style: none;
     margin: 0;
-    padding: 8px 16px 16px;
-    display: flex;
-    flex-direction: column;
+    padding: 0;
   }
-  .menu li a:not(.btn) {
+  .menu a {
     display: block;
-    padding: 12px 4px;
-    color: var(--ink);
+    padding: 12px 20px;
+    color: var(--link);
+    font-size: 15px;
     text-decoration: none;
-    font-weight: 600;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid #eaeaea;
   }
-  .menu li a[aria-current='page'] {
-    color: var(--brand);
-  }
-  .menu .btn {
-    margin-top: 12px;
-    width: 100%;
-  }
-
-  @media (min-width: 900px) {
+  @media (min-width: 922px) {
     .menu summary {
       display: none;
     }
-    /* Wide screens: the menu is always shown, whatever the details state. */
     .menu > nav {
       position: static;
       display: block;
-      background: none;
       border: 0;
       box-shadow: none;
+      background: none;
     }
     .menu ul {
-      flex-direction: row;
-      align-items: center;
-      gap: 4px;
-      padding: 0;
+      display: flex;
     }
-    .menu li a:not(.btn) {
+    .menu a {
       border: 0;
-      padding: 10px 12px;
-      border-radius: 8px;
+      padding: 0 15px;
+      line-height: 93px;
     }
-    .menu li a:not(.btn):hover {
-      background: var(--surface-2);
-    }
-    .menu .btn {
-      margin: 0 0 0 8px;
-      width: auto;
+    .menu a:hover {
+      text-decoration: underline;
     }
   }
-
   .site-footer {
-    background: #16251e;
-    color: #dfe7e2;
-    padding: 48px 0 24px;
-    margin-top: 0;
+    border-top: 1px solid #dddddd;
+    text-align: center;
+    padding: 20px;
+    font-size: 15px;
+    color: var(--body);
+    background: #fff;
   }
-  .site-footer a {
-    color: #a8e0c4;
-  }
-  .foot {
-    display: grid;
-    gap: 28px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-  .foot-name {
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  .foot-links {
-    list-style: none;
-    padding: 0;
+  .site-footer p {
     margin: 0;
-  }
-  .foot-links li {
-    margin-bottom: 6px;
-  }
-  .legal {
-    border-top: 1px solid #2f4339;
-    margin-top: 28px;
-    padding-top: 20px;
-    font-size: 0.9rem;
-    color: #b6c4bc;
   }
 </style>
 
 <script is:inline>
-  // On wide screens the menu is a plain row; keep the <details> open so it
-  // shows. On phones it starts closed and closes after a choice.
+  // Wide screens show the menu as a row: keep the <details> open there.
   (() => {
     const menu = document.querySelector('.menu');
     if (!menu) return;
-    const wide = matchMedia('(min-width: 900px)');
+    const wide = matchMedia('(min-width: 922px)');
     const sync = () => { menu.open = wide.matches; };
     sync();
     wide.addEventListener('change', sync);

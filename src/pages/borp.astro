@@ -1,24 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
 ---
 
-<Base title="BORP Summer Cycling Program 2026" description="Group handcycle rides in San Jose with BORP, including advanced long-distance electric-assist rides with Able Bodied.">
+<Base title="BORP Summer Cycling Program 2026">
   <section class="section">
-    <div class="narrow">
-      <p class="eyebrow">Group rides</p>
-      <h1>BORP Summer Cycling Program 2026</h1>
-      <p class="lead">BORP is hosting 16 group rides in San Jose in 2026, from pick-your-own-adventure manual rides to 30+ mile electric-assist group rides.</p>
-      <p><strong>South Bay residents</strong> can have the $25 BORP membership fee waived: email <a href="mailto:info@borp.org">info@borp.org</a> with your address.</p>
-      <div class="btn-row">
-        <a class="btn accent" href="https://forms.gle/EHX7SRTLW4utywUW6">Sign up today</a>
-      </div>
-
-      <h2 class="mt">Advanced rides with Able Bodied</h2>
-      <p>Able Bodied is partnering with BORP on three longer “advanced” rides. The first was a 38-mile ride to Los Altos (<a href="https://photos.app.goo.gl/muqLjgzTN9vva9tt9">pictures</a>). To sign up for an advanced long-distance electric-assist ride, please first have at least one <a href="/#lessons">one-on-one lesson</a> with Able Bodied.</p>
-
-      <h2 class="mt">Ride schedule</h2>
-    </div>
     <div class="wrap">
+      <h1 class="visually-hidden">BORP Summer Cycling Program 2026</h1>
+      <div class="text">
+        <p>BORP is hosting a series of 16 group rides in San Jose in 2026. These range from manual only pick your own adventure independent rides to 305+ mile group electric-assist rides.</p>
+        <p>NOTE: South Bay residents can get the $25 BORP membership fee waived, just e-mail <a href="mailto:info@borp.org">info@borp.org</a> with your address.</p>
+      </div>
+      <div class="btn-wrap"><a class="btn" href="https://forms.gle/EHX7SRTLW4utywUW6">Sign Up Today</a></div>
+      <Pic src="/wp-content/uploads/2026/07/IMG_5181-Medium.jpeg" alt="" sizes="(min-width: 680px) 640px, 100vw" class="photo" />
+      <div class="text">
+        <p>Able Bodied is partnering with BORP on three of those rides for longer “advanced” rides. The first of which was a 38 mile ride to Los Altos (<a href="https://photos.app.goo.gl/muqLjgzTN9vva9tt9">pics</a>). To sign up for an advance long distance electric assist ride, please first have at least one 1:1 lesson at <a href="/#services">Able Bodied</a>.</p>
+      </div>
       <div class="embed">
         <iframe
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSx6xt0ZpOLojfDp6j7DtOBp-FSqoTNx7k6EBbM9070Z6uhPPxz6NgxwmTSmLoRdBdaW5DN3BDO1K3L/pubhtml?widget=true&headers=false"
@@ -30,10 +27,12 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
-  .mt {
-    margin-top: 2em;
+  :global(.photo) {
+    margin: 10px auto 20px;
+    max-width: 640px;
+    width: 100%;
   }
   .embed iframe {
-    min-height: 640px;
+    min-height: 700px;
   }
 </style>

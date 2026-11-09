@@ -1,316 +1,297 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
-import PostCard from '../components/PostCard.astro';
+import Video from '../components/Video.astro';
+import Gallery from '../components/Gallery.astro';
+import Social from '../components/Social.astro';
+import { picture } from '../lib/picture.mjs';
 import { SITE } from '../lib/site';
-import { allPosts } from '../lib/posts';
 
-const latest = (await allPosts()).slice(0, 3);
 const U = '/wp-content/uploads';
-
-const lessons = [
-  {
-    title: 'In-person lesson in San Jose, CA',
-    image: `${U}/2025/11/Screenshot-2025-11-04-at-2.48.01-PM-Medium.jpeg`,
-    alt: 'A rider on a handcycle during a lesson',
-    text: 'A free one-on-one lesson on an electric-assist handcycle, with a special ramp that makes transferring easier. We have two delta-style handcycles and a wheelchair-attachable Stricker Tetra Lipo Smart handcycle that suits quadriplegic riders.',
-    href: SITE.links.scheduleSanJose,
-    cta: 'Schedule in San Jose',
-  },
-  {
-    title: 'In-person lesson in Sebastopol, CA',
-    image: `${U}/2025/11/Screenshot-2025-11-04-at-2.57.29-PM-Medium.jpeg`,
-    alt: 'Handcycles ready for a lesson in Sebastopol',
-    text: 'A free one-on-one lesson on an electric-assist handcycle, with a transfer ramp. Bikes here are a front-wheel-drive Top End Force 3 and a dual-motor, full-suspension Lasher. Neither is designed for quadriplegic riders.',
-    href: SITE.links.scheduleSebastopol,
-    cta: 'Schedule in Sebastopol',
-  },
-  {
-    title: 'Online consultation',
-    image: `${U}/2024/06/google-meet-512.webp`,
-    alt: '',
-    text: 'Book a video call to ask anything about electric-assist handcycling. We’re happy to work across time zones, so feel free to email us.',
-    href: SITE.links.scheduleOnline,
-    cta: 'Schedule a video call',
-  },
-];
-
-const guides = [
-  {
-    title: 'Italy',
-    tagline: 'Amazing food and massive mountains.',
-    text: 'The birthplace of the Roman empire, the Renaissance and pizza, with some of the most beautiful mountains in Europe. Our guide covers the best places to eat, how accessible our hotels were, and where to rent a handcycle.',
-    image: `${U}/2023/10/Screenshot-2023-10-23-at-6.20.53-PM.png`,
-    href: 'https://docs.google.com/document/d/1wqWwDZsvtk4lhqjW9FA9I_o19GyIyN-BOqRJg4FxiTM/edit?usp=sharing',
-  },
-  {
-    title: 'Poland',
-    tagline: 'Amazing food at amazing prices, plus scenic country roads.',
-    text: 'Eat like a king for a third to half of US prices. Warsaw is one of Europe’s most accessible cities, with elevators at every metro station, accessible buses and trolleys, and wide sidewalks with curb cuts. Wrocław has rentable handcycles.',
-    image: `${U}/2023/10/Screenshot-2023-10-23-at-6.23.11-PM.png`,
-    href: 'https://forms.gle/AhGqfshQWgsxHwgs8',
-  },
-  {
-    title: 'California',
-    tagline: 'Amazing natural beauty with limitless trail systems.',
-    text: 'Adaptive programs all over the state. Lake Tahoe, Mammoth or just the Bay Area: there are plenty of places to rent a handcycle and get off the beaten path.',
-    image: `${U}/2025/10/California.webp`,
-    href: 'https://forms.gle/AhGqfshQWgsxHwgs8',
-  },
-  {
-    title: 'France',
-    tagline: 'Amazing food and massive mountains.',
-    text: 'Fly to Lyon, the food capital of France, rent a minivan, and head for Chamonix and the French Riviera. Our guide lists places to rent handcycles or off-road quadtrixes to explore some of the most rugged, beautiful terrain in the world.',
-    image: `${U}/2025/10/Screenshot-2025-10-24-at-2.13.43-PM.png`,
-    href: 'https://docs.google.com/document/d/1wqWwDZsvtk4lhqjW9FA9I_o19GyIyN-BOqRJg4FxiTM/edit?usp=sharing',
-  },
-  {
-    title: 'Germany',
-    tagline: 'Great beer, innovative handcycles and ancient castles.',
-    text: 'Home to several handcycle makers, including Stricker, the oldest maker of wheelchair-attachable handcycles, plus interesting towns, castles and fun trails.',
-    image: `${U}/2025/10/Screenshot-2025-10-24-at-2.16.07-PM.png`,
-    href: 'https://forms.gle/AhGqfshQWgsxHwgs8',
-  },
-];
-
-const builds = [
-  {
-    title: 'Bafang front-wheel drive',
-    price: '~$1,000',
-    tags: ['Excellent beginner bike', 'Easiest to build and run', '50+ miles'],
-    text: 'Built to keep costs low and be reproducible in Ukraine. Much easier to put together and operate. A used handcycle is easy to find for about $2,000, so the total is around $3,000. We recommend a handcycle with at least a front disc brake.',
-    image: `${U}/2022/09/Bafang-Conversion.jpeg`,
-    href: '/2022/10/13/bafang-front-wheel-handcycle/',
-  },
-  {
-    title: 'Direct-drive front wheel',
-    price: '~$2,500',
-    tags: ['Perfect road bike', 'Regen braking, quad friendly', '60+ miles'],
-    text: 'Great for long road rides with big climbs and descents. Regenerative braking holds your speed downhill; trigger it by pedaling backwards, ideal for riders who can’t squeeze a brake lever.',
-    image: `${U}/2026/03/Screenshot-2026-03-13-at-9.52.51-AM.png`,
-    href: '/2022/10/13/front-motor-bike/',
-  },
-  {
-    title: 'All-wheel-drive “Beast”',
-    price: '~$5,000',
-    tags: ['Off-road dream machine', 'Leave the pavement', '70+ miles'],
-    text: 'Climbs steep, sandy fire roads and even snowy ski slopes. Two 1500W motors in the back plus hand power in the front: basically all-wheel drive.',
-    image: `${U}/2022/09/IMG_7339.jpg`,
-    href: 'https://forms.gle/6GEjErcZsiKLRk6h7',
-  },
-];
+const hero = picture(`${U}/2024/06/Monster-All-Wheel-Drive-Handcycle.jpg`);
+const L = SITE.links;
+const travelGuide = 'https://docs.google.com/document/d/1wqWwDZsvtk4lhqjW9FA9I_o19GyIyN-BOqRJg4FxiTM/edit?usp=sharing';
+const survey = 'https://forms.gle/AhGqfshQWgsxHwgs8';
+const buildForm = 'https://forms.gle/6GEjErcZsiKLRk6h7';
 
 const gallery = [
-  ['2022/04/IMG_4173-scaled.jpg', 'Riding down Kennedy Road'],
-  ['2022/04/IMG_4324-scaled.jpg', 'A happy handshake after a lesson'],
-  ['2022/04/IMG_4731-scaled.jpg', 'Good times after a lesson'],
-  ['2022/04/IMG_4323-scaled.jpg', 'Going down Leigh Avenue during a lesson'],
-  ['2021/02/IMG_1396-scaled.jpg', 'Top of Mount Hamilton: 37 miles, 4,946 ft'],
-  ['2021/02/IMG_20200605_171300-scaled.jpg', 'Biking up Montebello Road, with a wild peacock on the road'],
-  ['2021/02/IMG_20200508_171231-scaled.jpg', 'Highway 89 on the way to Monitor Pass'],
-  ['2021/02/IMG_1925-scaled.jpg', 'Hammocking after climbing Highway 4'],
-  ['2021/02/IMG_20200426_165052-scaled.jpg', 'Top of Monitor Pass with my son'],
-  ['2021/02/IMG_20200613_160616-scaled.jpg', 'Biking in Napa and picnicking at a winery'],
-  ['2022/04/IMG_5593-scaled.jpg', 'Out on a ride'],
-  ['2022/04/IMG_6809-scaled.jpg', 'Out on a ride'],
-] as const;
+  ['2021/02/IMG_20200702_174321-scaled.jpg', ''],
+  ['2021/02/IMG_20200426_165052-scaled.jpg', 'Top of Monitor pass with son (3,600 ft)'],
+  ['2021/02/IMG_20200613_160616-scaled.jpg', 'Biking in Napa and picnicking at a winery.'],
+  ['2022/04/IMG_4173-scaled.jpg', 'Riding down Kennedy Rd'],
+  ['2022/04/IMG_4324-scaled.jpg', 'Happy handshake after lesson'],
+  ['2022/04/IMG_4731-scaled.jpg', 'Good times after lesson'],
+  ['2022/04/IMG_6809-scaled.jpg', ''],
+  ['2022/04/IMG_3081.jpg', ''],
+  ['2022/04/IMG_3077-3-scaled.jpg', ''],
+  ['2022/04/IMG_3627-scaled.jpg', ''],
+  ['2022/04/IMG_3673-scaled.jpg', ''],
+  ['2022/04/IMG_4323-scaled.jpg', 'Going down Leigh Ave. during lesson'],
+  ['2022/04/IMG_5348-scaled.jpg', '51 mile ride up Black Mountain (fire road no problem)'],
+  ['2022/04/IMG_5593-scaled.jpg', ''],
+  ['2022/04/IMG_4343-scaled.jpg', ''],
+  ['2021/02/IMG_20200503_163052-scaled.jpg', ''],
+  ['2021/02/IMG_20200605_171300-scaled.jpg', 'Biking up Montebello road and spotting a wild peacock on the road.'],
+  ['2021/02/IMG_20200508_171231-scaled.jpg', 'HWY 89 on way to Monitor Pass'],
+  ['2021/02/IMG_1925-scaled.jpg', 'Hammocking after climbing up HWY 4'],
+  ['2021/02/IMG_1408-scaled.jpg', 'Above the clouds biking up Mount Hamilton'],
+  ['2021/02/IMG_1396-scaled.jpg', 'Top of Mount Hamilton 37 miles / 4,946 ft'],
+  ['2021/02/IMG_20200629_143240-scaled.jpg', ''],
+  ['2021/02/IMG_20200703_165917-scaled.jpg', 'Biking up HWY 4'],
+].map(([file, caption]) => ({ src: `${U}/${file}`, caption: caption ?? '' }));
 ---
 
 <Base>
-  <section class="hero">
-    <Pic
-      src={`${U}/2022/04/IMG_5348-scaled.jpg`}
-      alt="Wojtek on his electric-assist handcycle at the top of a 51-mile ride up Black Mountain"
-      sizes="100vw"
-      eager
-      class="hero-img"
-    />
-    <div class="hero-shade"></div>
-    <div class="wrap hero-text">
-      <h1>“Able bodied” experiences for ALL</h1>
-      <p class="hero-lead">Don’t let your disability stop you. Free electric-assist handcycling lessons in person and online, plus help finding the funding for a handcycle of your own.</p>
-      <div class="btn-row">
-        <a class="btn accent" href="#lessons">Book a free lesson</a>
-        <a class="btn on-dark" href="/borp/">BORP group rides</a>
-      </div>
-    </div>
-  </section>
+  <link slot="head" rel="preload" as="image" href={hero.src} imagesrcset={hero.srcset} imagesizes="100vw" fetchpriority="high" />
 
-  <section class="section" aria-labelledby="about">
-    <div class="wrap about">
-      <div>
-        <p class="eyebrow">About us</p>
-        <h2 id="about">Our mission</h2>
-        <p class="lead">Help people with disabilities around the world connect and experience “able bodied” adventures. Today, that means electric-assist handcycling.</p>
-        <p>We are a diverse group of life- and adventure-loving world travelers and DIY tinkerers. <a href="/board-of-directors/">Meet our board of directors.</a></p>
-      </div>
-      <div>
-        <h3>Our values</h3>
-        <ol class="values">
-          <li><strong>Positive vibes and happiness.</strong> Feel good and share that happiness with others.</li>
-          <li><strong>Open source.</strong> Share our knowledge with people and organizations around the world.</li>
-          <li><strong>Keep costs low.</strong> Frugality → affordability → accessibility for all. Our goal: an electric-assist handcycle for under $2,000.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" aria-labelledby="why">
-    <div class="narrow">
-      <h2 id="why">Why electric-assist handcycling</h2>
-      <p class="lead">It lets disabled riders keep up with anybody and enjoy an “able bodied” experience with friends and family.</p>
-      <p>It’s also a sport you can do independently, straight from your front door. You could hop on a handcycle and ride 50 miles even with a severe disability. See our <a href="https://www.youtube.com/watch?v=6xu5A22KXDc">quad bike review</a>.</p>
-    </div>
-  </section>
-
-  <section class="section" id="lessons" aria-labelledby="lessons-h">
-    <span id="services" class="anchor" aria-hidden="true"></span>
-    <div class="wrap">
-      <p class="eyebrow">Free</p>
-      <h2 id="lessons-h">One-on-one lessons, in person or online</h2>
-      <p class="lead">We’ll introduce you to electric-assist handcycling, then show you how to find grants and other funding to buy a handcycle of your own.</p>
-      <div class="grid">
-        {
-          lessons.map((l) => (
-            <article class="card">
-              <Pic src={l.image} alt={l.alt} class={l.alt ? undefined : 'logo-pic'} />
-              <div class="card-body">
-                <h3>{l.title}</h3>
-                <p>{l.text}</p>
-                <a class="btn" href={l.href}>{l.cta}</a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="get1help2" aria-labelledby="g12">
-    <span id="Get1Help2" class="anchor" aria-hidden="true"></span>
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">Fund your own handcycle</p>
-        <h2 id="g12">The Get 1 Help 2 program</h2>
-        <p class="lead">Our “pyramid scheme for good” to get people around the world into electric-assist handcycling.</p>
-        <a class="btn accent" href={SITE.links.get1help2}>Sign up for Get 1 Help 2</a>
-      </div>
-      <div>
-        <ol class="steps">
-          <li>We help you work out which handcycle is best for your needs. Find a local handcycle organization on <a href={SITE.wiki}>our wiki</a>.</li>
-          <li>We help you apply for grants and host tax-deductible fundraisers to pay for your handcycle.</li>
-          <li>We host monthly virtual meetups with other aspiring handcyclists to share progress and stay motivated.</li>
-        </ol>
-        <p>All we ask in return: become an <a href="https://www.facebook.com/hashtag/ablebodiedambassador">#AbleBodiedAmbassador</a> and recruit at least two people to the program.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="wiki">
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">Open source</p>
-        <h2 id="wiki">Handcycle map and guide</h2>
-        <p>Our open wiki at <a href={SITE.wiki}>wiki.ablebodied.org</a> aims to be the ultimate guide to where you can ride a handcycle. It has a <a href="https://wiki.ablebodied.org/books/handcycle-styles/page/handcycle-style-comparison">handcycle style guide</a> and a <a href="https://wiki.ablebodied.org/shelves/handcycle-manufacturers">list of manufacturers</a>, and anyone can improve it.</p>
-        <p>Use the map to find a handcycle near you, or near where you’re traveling.</p>
-        <a class="btn" href={SITE.links.map}>Browse the map</a>
-      </div>
-      <a href={SITE.links.map} class="map-link" aria-label="Open the handcycle location map">
-        <Pic src={`${U}/2025/11/Screenshot-2025-11-29-at-10.59.41-AM.png`} alt="" sizes="(min-width: 900px) 540px, 100vw" />
+  <section id="home" class="hero">
+    <Pic src={`${U}/2024/06/Monster-All-Wheel-Drive-Handcycle.jpg`} alt="" sizes="100vw" eager class="hero-img" />
+    <div class="hero-inner">
+      <h1>"Able Bodied" experiences for ALL</h1>
+      <p class="hero-sub">Don't let your disability stop you</p>
+      <div class="btn-wrap"><a class="btn cyan" href="#services">Book a FREE Lesson</a></div>
+      <p>We offer in person and online lessons.</p>
+      <p>We also can help you find grants / funding for your own handcycle.</p>
+      <a class="insta" href="https://www.instagram.com/ablebodiedorg/" aria-label="Able Bodied on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21.9 8.2c-.1-1.5-.4-2.8-1.5-3.9s-2.4-1.4-3.9-1.5c-1.5-.1-6.1-.1-7.6 0-1.5.1-2.8.4-3.9 1.5S3.6 6.7 3.5 8.2c-.1 1.5-.1 6.1 0 7.6.1 1.5.4 2.8 1.5 3.9s2.4 1.4 3.9 1.5c1.5.1 6.1.1 7.6 0 1.5-.1 2.8-.4 3.9-1.5s1.4-2.4 1.5-3.9c.1-1.5.1-6.1 0-7.6zm-2 9.2a3.1 3.1 0 0 1-1.7 1.7c-1.2.5-4 .4-5.2.4s-4.1.1-5.2-.4a3.1 3.1 0 0 1-1.7-1.7c-.5-1.2-.4-4-.4-5.3s-.1-4.1.4-5.2a3.1 3.1 0 0 1 1.7-1.7c1.2-.5 4-.4 5.2-.4s4.1-.1 5.2.4a3.1 3.1 0 0 1 1.7 1.7c.5 1.2.4 4 .4 5.2s.1 4.1-.4 5.3z" /></svg>
       </a>
     </div>
   </section>
 
-  <section class="section alt" aria-labelledby="guides">
+  <section id="about" class="section band">
+    <div class="wrap narrow">
+      <h2 class="heading">About</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <h5>Able Bodied Inc. is a California non-profit corporation founded in May 2024</h5>
+        <h4>Our Mission:</h4>
+        <p>Help people with disabilities around the world connect and experience “able bodied” adventures.</p>
+        <p>Our primary offering is electric assist handcycling currently</p>
+      </div>
+      <Video id="aWYoOmAazh8" title="What is AbleBodied.org?" />
+      <div class="text center">
+        <h4 class="gap">Our Values:</h4>
+        <p>1. <b>Positive vibes and happiness.</b> Our goal is to feel good and share our happiness with others.</p>
+        <p>2. <b>Share and open source</b> our knowledge base with people and organizations around the world</p>
+        <p>3.<b> Keep costs low. </b>Frugality → affordability → accessibility for all. Get the cost of an electric assist handcycle below $2,000</p>
+        <h4 class="gap">Our Services:</h4>
+        <p>
+          1. Free in person <b>electric assist handcycling <a href="#services">lessons</a></b><br />
+          2. Our <a href="#Get1Help2"><b>Get 1 Help 2</b></a> program<br />
+          3. Our open source map / travel guide / wiki to find handcycling places around the world
+        </p>
+        <h4 class="gap">Our Team:</h4>
+        <p>We are a diverse set of life/adventure loving world travelers and DIY tinkerers. <a href="/board-of-directors/">Click here</a> to learn more about our board of directors.</p>
+        <h4>News and Events:</h4>
+        <p>You can find out about our events by following our <a href={SITE.facebookPage}>Facebook page</a> or checking out our <a href="/blog/">blog</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Travel</p>
-      <h2 id="guides">Able Bodied travel guides</h2>
-      <p class="lead">Taking your own handcycle on a trip takes a lot of planning. Our open travel guides are written for wheelchair users, with tips on hotels, where to rent a handcycle, and where to eat (good food makes every trip better).</p>
-      <div class="grid">
-        {
-          guides.map((g) => (
-            <article class="card">
-              <Pic src={g.image} alt="" />
-              <div class="card-body">
-                <h3>{g.title}</h3>
-                <p><strong>{g.tagline}</strong></p>
-                <p>{g.text}</p>
-                <a class="btn ghost" href={g.href}>{g.title} travel guide</a>
-              </div>
-            </article>
-          ))
-        }
-        <article class="card request">
-          <div class="card-body">
-            <h3>Request a guide, or help write one</h3>
-            <p>Every guide is a simple Google Doc anyone can read or edit. Copy one, follow the format to write your own and share it with the community. Or ask us for one.</p>
-            <a class="btn" href="https://forms.gle/AhGqfshQWgsxHwgs8">Take our quick survey</a>
-          </div>
+      <h2 class="heading">Why electric assist handcycling</h2>
+      <hr class="divider" />
+      <div class="text">
+        <p>Electric assist handcycling allows disabled riders to keep up with anybody and enjoy an “able bodied” experience with their friends and family. It is also a sport that can be easily done independently and directly from your house. You could easily hop on a handcycle and bike 50 miles, even if you are severely disabled (see our quad bike <a href="https://www.youtube.com/watch?v=6xu5A22KXDc">review</a>).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="wrap">
+      <h2 class="heading">1-on-1 lessons (in person or virtual)</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <p>We offer free in person and virtual lessons on electric assist handcycling as well a 1:1 mentorship through our <a href={L.get1help2}>Get1Help2</a> program. Our goal is to introduce you to electric assist handcycling and then show you how you can find grants and other funding sources to help you purchase a handcycle of your own.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <Pic src={`${U}/2025/11/Screenshot-2025-11-04-at-2.48.01-PM-Medium.jpeg`} alt="Handcycle Lesson" />
+          <h3>In person lesson in San Jose CA</h3>
+          <div class="text"><p>Free 1:1 lesson on an electric assist handcycle. There is a special ramp to make transferring easier. We have two delta style handcycles and one wheelchair attachable Stricker Tetra Lipo Smart handcycle that is optimized for quadriplegics.</p></div>
+          <a class="btn" href={L.scheduleSanJose}>Schedule in San Jose</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2025/11/Screenshot-2025-11-04-at-2.57.29-PM-Medium.jpeg`} alt="" />
+          <h3>In person lesson in Sebastopol CA</h3>
+          <div class="text"><p>Free 1:1 lesson on an electric assist handcycle. There is a special ramp to make transferring easier. There is a front wheel drive Top End Force 3 and a dual motor full suspension Lasher. Unfortunately none of the handcycles are designed for quadriplegics in this location.</p></div>
+          <a class="btn" href={L.scheduleSebastopol}>Schedule in Sebastopol</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2024/06/google-meet-512.webp`} alt="" />
+          <h3>Online consultation<br /><span class="sub">(~30 minutes)</span></h3>
+          <div class="text"><p>Book a video call to ask any questions about e-assist handcycling. Happy to accommodate different time zones so feel free to e-mail us.</p></div>
+          <a class="btn" href={L.scheduleOnline}>Schedule Online Appointment</a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="builds">
+  <section id="Get1Help2" class="section">
     <div class="wrap">
-      <p class="eyebrow">Do it yourself</p>
-      <h2 id="builds">Convert a manual handcycle to electric</h2>
-      <p class="lead">We’ve built three kinds of conversion. Adding a motor to a manual handcycle is by far the cheapest way into the sport: we bought a used Top End Force 3 for $500 and electrified it for under $1,000, against $10,000+ for many new e-assist handcycles.</p>
-      <div class="grid">
-        {
-          builds.map((b) => (
-            <article class="card">
-              <Pic src={b.image} alt="" />
-              <div class="card-body">
-                <h3>{b.title} <span class="price">{b.price}</span></h3>
-                <ul class="tags">{b.tags.map((t) => <li>{t}</li>)}</ul>
-                <p>{b.text}</p>
-                <a class="btn ghost" href={b.href}>Build details</a>
-              </div>
-            </article>
-          ))
-        }
+      <h2 class="heading">Get 1 Help 2 Program (fund your own handcycle)</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <p>Out <a href={L.get1help2}>Get 1 Help 2 program</a> is our “Pyramid Scheme for Good” strategy to help people around the world get into electric assist handcycling. We will</p>
+        <p>1. Help you figure out what kind of handcycle is best for your needs (find a local handcycle organization on our <a href={SITE.wiki}>wiki</a>)</p>
+        <p>2. Help you apply for grants and also host tax deductible fund raisers to help finance your handcycle</p>
+        <p>3. Host monthly virtual meetings with other aspiring handcyclists to discuss progress and get inspired/motivated</p>
+        <p>All we ask for in return is that you become an <a href="https://www.facebook.com/hashtag/ablebodiedambassador">#AbleBodiedAmbassador</a> and recruit at least two people to join our program.</p>
       </div>
+      <div class="btn-wrap"><a class="btn" href={L.get1help2}>Sign up for Get1Help2</a></div>
+      <Video id="YSul--bUJc4" title="Our first 2026 #Get1Help2 graduate" />
     </div>
   </section>
 
-  <section class="section alt" aria-labelledby="news">
+  <section class="section">
     <div class="wrap">
-      <div class="head-row">
-        <h2 id="news">News and events</h2>
-        <a href="/blog/">All news →</a>
+      <h2 class="heading">Open Source Travel &amp; Handcycle Guide</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <p>We put together an open source wiki at <a href={SITE.wiki}>wiki.ablebodied.org</a> that is meant to be the ultimate guide on where you can find a handcycle to ride on. There is a <a href="https://wiki.ablebodied.org/books/handcycle-styles/page/handcycle-style-comparison">handcycle style guide</a> as well as list of <a href="https://wiki.ablebodied.org/shelves/handcycle-manufacturers">handcycle manufacturers</a> you can peruse and improve by updating and improving the information (as it is meant to be an open source resource). Click on the map below to find a handcycle location near you or close to where you might want to travel.</p>
       </div>
-      <div class="grid">
-        {latest.map((p) => <PostCard post={p} />)}
-      </div>
+      <a href={L.map} aria-label="Open the map of handcycle locations">
+        <Pic src={`${U}/2025/11/Screenshot-2025-11-29-at-10.59.41-AM.png`} alt="Map of handcycle locations" sizes="(min-width: 1180px) 1140px, 100vw" />
+      </a>
+      <div class="btn-wrap spaced"><a class="btn" href={L.map}>Browse map</a></div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="gallery">
+  <section class="section">
     <div class="wrap">
-      <h2 id="gallery">Gallery</h2>
-      <ul class="gallery">
-        {
-          gallery.map(([file, caption]) => (
-            <li>
-              <figure>
-                <Pic src={`${U}/${file}`} alt={caption} sizes="(min-width: 900px) 270px, 50vw" />
-                <figcaption>{caption}</figcaption>
-              </figure>
-            </li>
-          ))
-        }
-      </ul>
+      <h2 class="heading">Able Bodied Travel Guides</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <p>A key challenge we have found is being able to travel the great outdoors while traveling. Taking your own handcycle is possible, but requires extensive planning of transportation and storage. With this in mind we are hoping to seed a community of fellow adventurers and put together “open source” travel guides that other can add to and improve.. Our guides are written with the wheelchair bound traveler in mind with tips on hotels, where to rent a handcycle, and where to eat (good food makes every trip better).</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <Pic src={`${U}/2023/10/Screenshot-2023-10-23-at-6.20.53-PM.png`} alt="" />
+          <h3>Italy</h3>
+          <div class="text">
+            <p><b>Amazing food and massive mountains.</b></p>
+            <p>Italy is not only the birthplace of the Roman empire, the Renaissance, and pizza, it has some of the most beautiful mountains in Europe.</p>
+            <p>Our guide covers the best places to eat, how accessible the hotels we stayed at, and where you can rent a handcycle.</p>
+          </div>
+          <a class="btn" href={travelGuide}>Travel Guide</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2023/10/Screenshot-2023-10-23-at-6.23.11-PM.png`} alt="" />
+          <h3>Poland</h3>
+          <div class="text">
+            <p><b>Amazing food at amazing prices plus scenic country roads.</b></p>
+            <p>In Poland you can eat delicious like a king and pay between 1/3 to 1/2 of what you would pay in the US. Warsaw is one of the most accessible cities in Europe with elevators at every metro station, excellent public transit on wheelchair accessible buses and trollies,.and wide sidewalks with curb cuts. Wroclaw is another awesome city with rentable handcycles.</p>
+          </div>
+          <a class="btn" href={survey}>Travel Guide</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2025/10/California.webp`} alt="" />
+          <h3>California</h3>
+          <div class="text">
+            <p><b>Amazing natural beauty with limitless trail systems</b></p>
+            <p>California offers many different playgrounds with adaptive programs all over the state. If it is Lake Tahoe, Mammoth, or just the Bay Area, there are plenty of options to rent a handcycle and get off the beaten path..</p>
+          </div>
+          <a class="btn" href={survey}>Travel Guide</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2025/10/Screenshot-2025-10-24-at-2.13.43-PM.png`} alt="" />
+          <h3>France</h3>
+          <div class="text">
+            <p><b>Amazing food and massive mountains.</b></p>
+            <p>We highly recommend a flight to Lyon, the epicurean capital of France, where you can rent a minivan on Turo and go check out Chamonix and the French riviera. Our guide has an extensive list of places you can rent either handcycles or off-road quadtrixes that you can use to explore some of the most rugged and beautiful terrain in the world.</p>
+          </div>
+          <a class="btn" href={travelGuide}>Travel Guide</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2025/10/Screenshot-2025-10-24-at-2.16.07-PM.png`} alt="" />
+          <h3>Germany</h3>
+          <div class="text">
+            <p><b>Great beer, innovative handcycles, and ancient castles</b></p>
+            <p>Germany has a long history of engineering, manufacturing, and great beer. It is home to several handcycle manufacturers including Stricker the oldest wheelchair attachable handcycle. It is also home to some interesting towns, castles, and fun trails to go handcycling on</p>
+          </div>
+          <a class="btn" href={survey}>Travel Guide</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2025/10/modern-question-mark-template-idea-message-vector-isolated-white-background-11_1119689-5070.avif`} alt="" />
+          <h3>Request a guide</h3>
+          <div class="text">
+            <p><b>Or help us write one</b></p>
+            <p>All our guides are written in a simple Google doc that is available for anybody to read and/or edit. Feel free to copy one and follow the format to create your own guide and share it with the community. Or request one. Either way, take our quick survey to let us know..</p>
+          </div>
+          <a class="btn" href={survey}>Take survey</a>
+        </article>
+      </div>
+      <hr class="divider" />
     </div>
   </section>
 
-  <section class="section cta">
-    <div class="narrow center">
-      <h2>Help someone ride again</h2>
-      <p class="lead">Your donation funds free lessons, handcycles and open resources for riders around the world.</p>
-      <div class="btn-row center-row">
-        <a class="btn accent" href="/donate/">Donate</a>
-        <a class="btn ghost" href={`mailto:${SITE.email}`}>Email us</a>
+  <section id="gallery" class="section band">
+    <div class="wrap">
+      <h2 class="heading">Gallery</h2>
+      <hr class="divider" />
+      <Gallery photos={gallery} label="Gallery" />
+    </div>
+  </section>
+
+  <section id="mywork" class="section">
+    <div class="wrap">
+      <h2 class="heading">How to convert a manual handcycle to electric</h2>
+      <hr class="divider" />
+      <div class="text center">
+        <p>We have completed three different types of handcyckle ebike conversions. Buying a manual handcycle and adding electric assist is by far the least expensive way to get into the sport. We have purchased a used Top End Force 3 on Facebook marketplace for $500 and added a motor to it for under $1,000, which is significantly less than new electric assist handcycles, which frequently go for $10K+..</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <Pic src={`${U}/2022/09/Bafang-Conversion.jpeg`} alt="" />
+          <h3>Bafang Front Wheel Drive<br />~$1,000</h3>
+          <div class="text">
+            <p><b>Excellent beginner bike.</b></p>
+            <p><b>Easiest to build and operate.</b></p>
+            <p><b>Go 50 miles+</b></p>
+            <p>The goal of this e-bike conversion was to minimize cost and deliver a bike that could be reproduced in Ukraine (<a href="https://www.gofundme.com/f/nfddcy-help-ukrainians-with-disabilities">project details</a>). This build is not only less expensive, but a lot easier to put together and operate. It is not hard to find a used handcycle for $2,000, making the total cost of this e-assist handcycle ~$3,000. We recommend you get a handcycle with at least a disc brake in the front to have enough stopping power.</p>
+          </div>
+          <a class="btn" href={buildForm}>Build Details</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2026/03/Screenshot-2026-03-13-at-9.52.51-AM.png`} alt="" />
+          <h3>Direct Drive Front Wheel<br />~$2,500</h3>
+          <div class="text">
+            <p><b>Perfect road bike</b></p>
+            <p><b>Regen braking &amp; quad friendly</b></p>
+            <p><b>Go 60 miles+</b></p>
+            <p>This is a great option for someone interested in going on long road bike rides that may have long climbs and descents. It is simpler than building the all-wheel drive bike and will provide regenerative braking to maintain your speed on descents. You can trigger regen by pedaling backwards, which is an awesome feature for quadriplegics or users with limited hand function that prevents them from being able to squeeze a regular brake lever.</p>
+          </div>
+          <a class="btn" href="https://docs.google.com/document/d/1eae5VK7FJt35_gz1tfWpUS3cownYP0U_4DrgKW-XK70/edit?tab=t.0#heading=h.nbrzm799uk83">Build Details</a>
+        </article>
+        <article class="card">
+          <Pic src={`${U}/2022/09/IMG_7339.jpg`} alt="" />
+          <h3>All Wheel Drive "Beast"<br />~$5,000</h3>
+          <div class="text">
+            <p><b>Off-road dream machine</b></p>
+            <p><b>Get off the paved roads!</b></p>
+            <p><b>Go 70 miles+</b></p>
+            <p>This bike will ride up steep sandy fire roads and even snow covered ski slopes. It has two 1500W motors in the back and hand powered propulsion in the front, so is basically all wheel drive.</p>
+          </div>
+          <a class="btn" href={buildForm}>Build Details</a>
+        </article>
+      </div>
+      <hr class="divider" />
+    </div>
+  </section>
+
+  <section class="section contact">
+    <div class="wrap">
+      <div class="boxes">
+        <div><h5>E-mail Us</h5><p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p></div>
+        <div><h5>Our Locations</h5><p>San Jose, CA 95124<br />Sebastopol CA</p></div>
+        <div><h5>Open Hours</h5><p>By appointment only</p></div>
+        <div><h5>Follow Us</h5><Social /></div>
+      </div>
+      <hr class="divider" />
+      <div class="text legal">
+        <p><b>Able Bodied Inc.</b> is a nonprofit, tax-exempt charitable organization (tax ID number {SITE.ein}) under Section 501(c)(3) of the Internal Revenue Code. Donations are tax-deductible as allowed by law.</p>
+        <p><a href="/privacy-policy/">Privacy Policy</a></p>
       </div>
     </div>
   </section>
@@ -319,12 +300,12 @@ const gallery = [
 <style>
   .hero {
     position: relative;
-    min-height: min(78vh, 680px);
-    display: flex;
-    align-items: flex-end;
-    color: #fff;
+    min-height: min(990px, 100svh);
+    display: grid;
+    place-items: center;
+    text-align: center;
     overflow: hidden;
-    background: #1c2a23;
+    background: #222;
   }
   .hero :global(.hero-img) {
     position: absolute;
@@ -332,119 +313,99 @@ const gallery = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 60%;
   }
-  .hero-shade {
+  .hero::after {
+    content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgb(0 0 0 / 0.05) 20%, rgb(0 0 0 / 0.72) 100%);
+    background: rgb(0 0 0 / 0.5);
   }
-  .hero-text {
+  .hero-inner {
     position: relative;
-    padding: 120px 0 56px;
+    z-index: 1;
+    padding: 80px 20px;
+    color: #f7eded;
+    font-family: var(--roboto);
   }
   .hero h1 {
-    max-width: 16ch;
-    text-shadow: 0 2px 16px rgb(0 0 0 / 0.4);
-  }
-  .hero-lead {
-    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
-    max-width: 52ch;
-    text-shadow: 0 1px 8px rgb(0 0 0 / 0.5);
-  }
-  .btn.on-dark {
-    background: rgb(255 255 255 / 0.12);
-    border-color: #fff;
     color: #fff;
-    backdrop-filter: blur(4px);
+    font-size: 40px;
+    margin-bottom: 14px;
   }
-  .about,
-  .split {
-    display: grid;
-    gap: 32px;
-    align-items: center;
+  .hero-sub {
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 8.4px;
+    color: #d5d5d5;
+    margin-bottom: 24px;
   }
-  @media (min-width: 900px) {
-    .about,
-    .split {
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
+  .hero .btn-wrap {
+    margin-bottom: 28px;
+  }
+  .insta {
+    display: inline-block;
+    margin-top: 16px;
+  }
+  .insta svg {
+    width: 50px;
+    height: 50px;
+    fill: var(--blue);
+  }
+  @media (max-width: 767px) {
+    .hero h1 {
+      font-size: 30px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      letter-spacing: 4px;
     }
   }
-  .values,
-  .steps {
-    padding-left: 1.3em;
+  .narrow {
+    width: min(100% - 40px, 980px);
   }
-  .values li,
-  .steps li {
-    margin-bottom: 0.75em;
+  .gap {
+    margin-top: 1.4em;
   }
-  .steps li::marker {
-    font-weight: 800;
-    color: var(--accent);
+  #about .text h5 {
+    margin-top: 10px;
   }
-  .anchor {
-    position: relative;
-    top: -80px;
-    display: block;
+  .card .sub {
+    color: var(--dark);
+    font-size: 18px;
   }
-  .map-link :global(img) {
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
+  .spaced {
+    margin-top: 40px;
   }
-  .request {
-    background: var(--brand-soft);
-  }
-  .card :global(.logo-pic) {
-    object-fit: contain;
-    padding: 40px;
-    background: var(--surface-2);
-  }
-  .price {
-    color: var(--accent);
-    font-size: 1rem;
-    white-space: nowrap;
-  }
-  .head-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .gallery {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .boxes {
     display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fill, minmax(min(46%, 240px), 1fr));
-  }
-  .gallery figure {
-    margin: 0;
-  }
-  .gallery :global(img) {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  .gallery figcaption {
-    font-size: 0.9rem;
-    color: var(--ink-2);
-    margin-top: 6px;
-  }
-  .cta {
-    background: var(--brand-soft);
-  }
-  .center {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     text-align: center;
   }
-  .center .lead {
-    margin-inline: auto;
+  @media (max-width: 767px) {
+    .boxes {
+      grid-template-columns: 1fr 1fr;
+    }
   }
-  .center-row {
-    justify-content: center;
+  .boxes h5 {
+    color: var(--blue);
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .boxes p {
+    color: var(--text);
+    font-family: var(--roboto);
+    margin: 0;
+  }
+  .boxes a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .contact {
+    padding-bottom: 10px;
+  }
+  .legal b {
+    color: var(--body);
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 title: "Bafang Front Wheel Drive ($1,000)"
 date: 2022-10-13
+author: "Anatol Poppe"
 slug: "bafang-front-wheel-handcycle"
 categories: ["handcycle-conversions"]
 description: "The Bafang e-bike kit is the most affordable and easiest to install option. The kit is aimed more at mass market consumers vs DIY shops and enthusiasts tha"

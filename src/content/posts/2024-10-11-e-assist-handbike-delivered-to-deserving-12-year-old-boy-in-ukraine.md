@@ -1,6 +1,7 @@
 ---
 title: "E-assist handbike delivered to deserving 12 year old boy in Ukraine"
 date: 2024-10-11
+author: "Anatol Poppe"
 slug: "e-assist-handbike-delivered-to-deserving-12-year-old-boy-in-ukraine"
 categories: ["uncategorized"]
 cover: "/wp-content/uploads/2024/10/Screenshot-2024-10-06-at-2.47.38-PM.png"

@@ -1,11 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
-import { allPosts, CATEGORIES, type Post } from '../../lib/posts';
+import { allPosts, CATEGORIES, CATEGORY_PAGES, type Post } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await allPosts();
-  return Object.keys(CATEGORIES).map((category) => ({
+  return CATEGORY_PAGES.map((category) => ({
     params: { category },
     props: { posts: posts.filter((p) => p.data.categories.includes(category)) },
   }));
@@ -21,13 +21,21 @@ const label = CATEGORIES[category] ?? category;
 ---
 
 <Base title={label}>
-  <section class="section">
+  <div class="boxed">
     <div class="wrap">
-      <p><a href="/blog/">← All news</a></p>
-      <h1>{label}</h1>
-      <div class="grid">
-        {posts.map((p) => <PostCard post={p} />)}
-      </div>
+      <header class="entry archive">
+        <h1 class="entry-title">Category: {label}</h1>
+      </header>
+      {posts.map((p) => <PostCard post={p} />)}
     </div>
-  </section>
+  </div>
 </Base>
+
+<style>
+  .archive {
+    padding-block: 30px;
+  }
+  .archive h1 {
+    margin: 0;
+  }
+</style>

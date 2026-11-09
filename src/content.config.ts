@@ -11,6 +11,8 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    /** Shown as "By …" under the title. */
+    author: z.string().optional(),
     slug: z.string(),
     /** events, handcycle-conversions; anything else just shows on the blog. */
     categories: z.array(z.string()).default([]),

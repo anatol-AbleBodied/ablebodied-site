@@ -1,24 +1,39 @@
 ---
 import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
 ---
 
-<Base title="Able Bodied Ambassadors" description="Map of Able Bodied ambassadors around the world.">
+<Base title="Order Now">
   <section class="section">
     <div class="wrap">
-      <h1>Map of Able Bodied Ambassadors</h1>
-      <p class="lead">Riders from our <a href="/#get1help2">Get 1 Help 2</a> program who are spreading electric-assist handcycling where they live.</p>
+      <h1 class="visually-hidden">Order Now</h1>
+      <Pic src="/wp-content/uploads/2024/12/Screenshot-2024-11-30-at-9.29.10-AM.png" alt="FAT JEETrike Build & Price. Base: $14,395. Official invoice will vary." sizes="(min-width: 789px) 749px, 100vw" class="trike" />
+      <div class="btn-wrap pair">
+        <a class="btn" href="#">Order Now</a>
+        <a class="btn" href="https://medium.com/@destineees/sad-face-emoji-6b669be4a1ca">Stay Frugal</a>
+      </div>
+      <h2 class="heading">Map of Able Bodied Ambassadors</h2>
       <div class="embed">
-        <iframe
-          src="https://www.google.com/maps/d/embed?mid=1Nup-SD8aUK2cWOqI4SH2KJ4qbg5wvT0&hl=en&ehbc=2E312F"
-          title="Map of Able Bodied ambassadors"
-          loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1Nup-SD8aUK2cWOqI4SH2KJ4qbg5wvT0&hl=en&ehbc=2E312F" title="Map of Able Bodied ambassadors" loading="lazy"></iframe>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
+  :global(.trike) {
+    margin: 0 auto 10px;
+    max-width: 749px;
+    width: 100%;
+  }
+  .pair {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
   .embed iframe {
-    min-height: 560px;
+    min-height: 480px;
+    margin-top: 20px;
   }
 </style>

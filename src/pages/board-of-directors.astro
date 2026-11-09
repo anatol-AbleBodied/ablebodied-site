@@ -3,112 +3,133 @@ import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
 
 const U = '/wp-content/uploads';
+// Wording as on the WordPress page. LinkedIn links only where the page had a
+// working one for that person.
 const board = [
   {
     name: 'Anatol Poppe',
     role: 'President',
     photo: `${U}/2024/06/Anatol-Poppe.jpg`,
-    bio: 'Anatol is a full-time student studying to be an electrical engineer. He was 10 years old when his father was paralyzed in a bicycle accident. He helped his father convert his first handcycle to electric assist, which completely changed his father’s life — so much so that they decided to share the technology with the disabled community and started the Able Bodied handcycle program under NorCal SCI. Anatol is the “able bodied” help for all the one-on-one lessons and makes sure the rides are safe and the bikes are in good condition.',
+    bio: 'Anatol is a full-time student studying to be an electrical engineer. He was 10 years old when his father was paralyzed in a bicycle accident. He helped his father convert his first handcycle to add electric assist, which completely changed his father’s life. So much so that they decided to share the technology with the disabled community and started the Able Bodied handcycle program under <a href="http://www.norcalsci.org">NorCal SCI</a>. Anatol is the “able bodied” help for all the 1:1 lessons and helps make sure are the rides are safe and bikes are in good condition.',
   },
   {
     name: 'Wojtek Poppe',
     role: 'Treasurer / Test Dummy',
     photo: `${U}/2024/06/Wojtek.jpeg`,
-    bio: 'Wojtek is a lifelong avid cyclist and outdoor enthusiast. He was a mountain biker, road biker, skier, windsurfer, hang gliding pilot and adventurer before he became a T5 complete paraplegic, with no sensation or muscle control below his chest. Electric-assist handcycling was the first activity that helped him feel “able bodied” again. He now rides with the same friends, on the same routes, as before he was paralyzed.',
+    bio: 'Wojtek is a life long avid cyclist and outdoor enthusiast. He was an avid mountain biker, road biker, skier, windsurfer, hang gliding pilot, and adventurer before he became a T5 complete paraplegic (with no sensation or muscle control below his chest). Electric assist handcycling was the first activity he has done that has helped him feel “able bodied” again. He now goes on rides with the same friends and on the same routes he used to bike with before he was paralyzed.',
   },
   {
     name: 'Natalie Zhar',
     role: 'Secretary',
     photo: `${U}/2024/06/Natalie-Zhar.jpeg`,
-    bio: 'Natalie is an Assistant Professor at Stanford University School of Medicine. She has been an NIH-funded academic researcher in translational neuroscience, covering imaging and biomarkers, for over two decades. Her background in writing grants and running human studies makes her a key asset for Able Bodied and the disabled community.',
+    bio: 'Natalie is an Assistant Professor at Stanford University School of Medicine. She has been an NIH funded academic researcher with a focus on translational neuroscience comprising of imaging and biomarkers for over two decades. Her background in writing grants and running human studies makes her a key asset for Able Bodied and the disabled community.',
+    linkedin: 'https://www.linkedin.com/in/natalie-zahr-2185886/',
   },
   {
     name: 'Sam Kolb',
     role: 'Board Member',
     photo: `${U}/2024/06/Sam-Kolb.jpeg`,
-    bio: 'Sam is an engineering leader with 25 years of experience building cutting-edge technology in Silicon Valley, in both startups and established companies, including the last five years as a senior manager at Meta working on large language models and AI. Sam was one of the first riders in the Able Bodied program and now runs Able Bodied Sonoma out of his house in Sebastopol.',
+    bio: 'Sam is an accomplished engineering leader with 25 years of experience building cutting-edge technology in Silicon Valley. He has a proven track record of success in both startup and established company environments, spending the last five years as a senior manager at Meta with extensive experience in large language models and AI. Sam was one of the first riders in the Able Bodied program and is now running Able Bodied Sonoma out of his house in Sebastopol.',
+    linkedin: 'https://www.linkedin.com/in/samkolb/',
   },
   {
     name: 'Matthew Beadon',
     role: 'Board Member',
     photo: `${U}/2024/10/Screenshot-2024-10-24-at-10.16.23-AM-Medium.jpeg`,
-    bio: 'Matt is an adventure-seeking engineer whose one-year experiment in Silicon Valley has lasted two decades (so far). He loves cycling and wants to help more people have able-bodied experiences among the coastal redwoods.',
+    bio: 'Matt is an adventure seeking engineer who’s one year experiment in Silicon valley has lasted two decades (so far). He loves cycling and wants to help more people experience able bodied experiences among the coastal redwoods.',
+    linkedin: 'https://www.linkedin.com/in/mattbeadon/',
   },
   {
     name: 'Suet Fei Li',
     role: 'Board Member',
     photo: `${U}/2024/10/Screenshot-2024-10-24-at-10.31.58-AM.png`,
-    bio: 'Born in China and educated in the US, Suet Fei is an avid runner who represented Hong Kong in international competitions. She has seen the uplifting impact of sport — purpose and meaning, strong communities, better physical and mental health — and is passionate about making sports accessible to people of all ages, economic backgrounds and physical abilities. When she isn’t running, she is a software engineer at Google.',
+    bio: 'Born in China and educated in the US, Suetfei is an avid runner who represented Hong Kong in international competitions. She has seen the overwhelmingly uplifting impact of sports participation: providing purpose and meaning, strong communities, boosting physical and mental health. She is passionate about removing barriers and making sports accessible to people of all ages, economic backgrounds and physical abilities. When she is not running around, suetfei is a software engineer at Google.',
+    linkedin: 'https://www.linkedin.com/in/suet-fei-li-26a4821/',
   },
   {
     name: 'Shara Poppe',
     role: 'Board Member',
     photo: `${U}/2024/10/Screenshot-2024-10-31-at-10.54.35-AM.png`,
-    bio: 'Shara is an experienced nurse manager in oncology and an avid runner and hiker. She competes in ultramarathons and recently qualified for the Boston Marathon. She enjoys hikes and bike rides with her paralyzed husband, Wojtek, and has seen first-hand how life-changing electric-assist handcycling can be, not only for the rider but for the whole family.',
+    bio: 'Shara is an experienced nurse manager in Oncology and avid runner/hiker. She likes to compete in ultramarathons and recently hit a major bucket list item by qualifying for the Boston marathon. She enjoys going on hikes and bike rides with her paralyzed husband, Wojtek, and is a first hand witness to how life changing electric assist handcycling can be not only for the rider, but his entire family.',
   },
 ];
 ---
 
-<Base title="Board of Directors" description="Meet the board of directors of Able Bodied Inc.">
+<Base title="Board of Directors">
   <section class="section">
     <div class="wrap">
-      <h1>Board of directors</h1>
-      <p class="lead">A diverse group of life- and adventure-loving world travelers and DIY tinkerers.</p>
-      <ul class="people">
-        {
-          board.map((p) => (
-            <li class="card">
-              <Pic src={p.photo} alt={`Portrait of ${p.name}`} sizes="160px" class="face" />
-              <div class="card-body">
-                <h2>{p.name}</h2>
-                <p class="role">{p.role}</p>
-                <p>{p.bio}</p>
+      <h1 class="visually-hidden">Board of Directors</h1>
+      {
+        board.map((p, i) => (
+          <>
+            {i > 0 && <hr class="rule" />}
+            <article class="member">
+              <div class="photo">
+                <Pic src={p.photo} alt={p.name} sizes="300px" />
               </div>
-            </li>
-          ))
-        }
-      </ul>
+              <div class="text">
+                <h2>{p.name}</h2>
+                <h3>{p.role}</h3>
+                <p set:html={p.bio} />
+                {p.linkedin && (
+                  <a class="linkedin" href={p.linkedin} aria-label={`${p.name} on LinkedIn`}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.7 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z" /></svg>
+                  </a>
+                )}
+              </div>
+            </article>
+          </>
+        ))
+      }
     </div>
   </section>
 </Base>
 
 <style>
-  .people {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .member {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
+    padding: 10px;
+    align-items: start;
   }
-  .people .card {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0;
+  @media (max-width: 767px) {
+    .member {
+      grid-template-columns: 1fr;
+    }
   }
-  .people :global(.face) {
-    width: 140px;
-    height: 140px;
-    aspect-ratio: 1;
+  .photo {
+    display: flex;
+    justify-content: center;
+  }
+  .photo :global(img) {
+    width: 300px;
+    height: 300px;
     object-fit: cover;
-    border-radius: 50%;
-    margin: 20px 0 20px 20px;
-    flex: none;
   }
-  @media (max-width: 600px) {
-    .people .card {
-      flex-direction: column;
-    }
-    .people :global(.face) {
-      width: 112px;
-      height: 112px;
-    }
+  .member h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
   }
-  .people h2 {
-    font-size: 1.35rem;
-    margin-bottom: 0.15em;
+  .member h3 {
+    font-size: 20px;
   }
-  .role {
-    color: var(--accent);
-    font-weight: 700;
+  .rule {
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 15px 0;
+  }
+  .linkedin {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    background: #0077b5;
+    border-radius: 10%;
+  }
+  .linkedin svg {
+    width: 15px;
+    height: 15px;
+    fill: #fff;
   }
 </style>

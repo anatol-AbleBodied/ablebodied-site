@@ -1,0 +1,33 @@
+---
+/**
+ * A YouTube video shown as its thumbnail; the player loads only when someone
+ * presses play, so the page stays fast. Without JavaScript the button is a
+ * link to the video on YouTube.
+ */
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<div class="video" data-video={id}>
+  <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" width="480" height="360" />
+  <a href={`https://www.youtube.com/watch?v=${id}`} class="visually-hidden">Watch “{title}” on YouTube</a>
+  <button type="button" aria-label={`Play video: ${title}`}><span></span></button>
+</div>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('[data-video]')) {
+    box.querySelector('button')?.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${box.dataset.video}?autoplay=1&rel=0`;
+      frame.title = box.querySelector('button')?.getAttribute('aria-label') ?? 'Video';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      box.replaceChildren(frame);
+      frame.focus();
+    });
+  }
+</script>

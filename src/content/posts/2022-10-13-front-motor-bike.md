@@ -1,6 +1,7 @@
 ---
 title: "Direct Drive Front Wheel Top End Force 3 Build ($2,500)"
 date: 2022-10-13
+author: "Anatol Poppe"
 slug: "front-motor-bike"
 categories: ["handcycle-conversions"]
 description: "he Direct Drive front wheel drive build is for builders that want regenerative braking (useful for descending), but do not want to build custom brackets fo"

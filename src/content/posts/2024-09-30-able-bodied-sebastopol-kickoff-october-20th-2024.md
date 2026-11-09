@@ -1,6 +1,7 @@
 ---
 title: "Able Bodied Sonoma Kickoff October 20th 2024"
 date: 2024-09-30
+author: "Anatol Poppe"
 slug: "able-bodied-sebastopol-kickoff-october-20th-2024"
 categories: ["uncategorized"]
 description: "Able Bodied is expanding! Sam Kolb, one of our board members, has generously offered his home in Sebastopol as a second Able Bodied handcycling lesson site"

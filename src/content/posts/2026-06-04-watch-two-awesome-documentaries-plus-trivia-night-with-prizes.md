@@ -1,6 +1,7 @@
 ---
 title: "Watch two award winning documentaries plus trivia night with prizes"
 date: 2026-06-04
+author: "Wojtek Poppe"
 slug: "watch-two-awesome-documentaries-plus-trivia-night-with-prizes"
 categories: ["uncategorized"]
 cover: "/wp-content/uploads/2026/06/Handbike-documentaries.jpeg"

@@ -1,50 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../lib/site';
-
+const meet = 'https://meet.google.com/mdn-uetc-bco';
 ---
 
-<Base title="2-Year Celebration and Trivia Night" description="Able Bodied's two-year celebration with documentaries and adaptive sports trivia, June 22, 2026.">
+<Base title="vir">
   <section class="section">
-    <div class="narrow">
-      <p class="eyebrow">Past event · Monday, June 22, 2026</p>
-      <h1>Able Bodied 2-year celebration and trivia night</h1>
-      <p class="lead">Two award-winning documentaries plus trivia night with prizes. <a href="/2026/06/04/watch-two-awesome-documentaries-plus-trivia-night-with-prizes/">Event details</a></p>
-      <h2>Schedule (Pacific time)</h2>
-      <table class="schedule">
-        <tbody>
-          <tr><th scope="row">5:30–6:10pm</th><td>Mingle online in Google Meet</td></tr>
-          <tr><th scope="row">6:25–7:10pm</th><td>Watch <a href="https://watch.eventive.org/bestdayever/play/69727c118f16d4f35037d1d7">Best Day Ever</a> ($10)</td></tr>
-          <tr><th scope="row">7:10–7:25pm</th><td>Watch <a href="https://www.youtube.com/watch?v=EE696qDOy-Y">Quinn Brett and the Tour Divide</a> (free)</td></tr>
-          <tr><th scope="row">7:25–7:35pm</th><td>Learn about Able Bodied and the BORP summer cycling program (<a href="https://docs.google.com/presentation/d/1G-N51yIjaYZeli1v7cW7nU8CebIY2ew36yehZ87I03w/edit?usp=sharing">slides</a>)</td></tr>
-          <tr><th scope="row">7:35–8:00pm</th><td>Adaptive sports trivia night on Kahoot</td></tr>
-        </tbody>
-      </table>
-      <p>You can still watch both films on your own time.</p>
-      <h2>Stay in touch</h2>
-      <p>
-        Follow us on {SITE.social.map((s, i) => <>{i > 0 && (i === SITE.social.length - 1 ? ' and ' : ', ')}<a href={s.href}>{s.label}</a></>)}, or <a href="/borp/">sign up for a BORP ride</a>.
-      </p>
+    <div class="wrap">
+      <h1 class="heading">Able Bodied 2 Year Celebration / Trivia night<br />Join virtually at 5:30pm or 7:25pm on Monday June 22 2026</h1>
+      <h2 class="sub">Join us to watch two award winning documentaries plus trivia night with prizes (<a href="/2026/06/04/watch-two-awesome-documentaries-plus-trivia-night-with-prizes/">details</a>)</h2>
+      <div class="btn-wrap"><a class="btn" href={meet}>Click here to join virtually</a></div>
+      <div class="text">
+        <p><b>Schedule</b></p>
+        <p>5:30pm – 6:10pm PST: Mingle online in <a href={meet}>Google meet</a></p>
+        <p>6:25pm – 7:10pm PST: Watch <a href="https://watch.eventive.org/bestdayever/play/69727c118f16d4f35037d1d7">Best Day Ever</a> ($10)</p>
+        <p>7:10pm – 7:25pm PST: Watch <a href="https://www.youtube.com/watch?v=EE696qDOy-Y">QUINN BRETT AND THE TOUR DIVIDE</a> (FREE)</p>
+        <p>It is OK to watch the movies above on your own time and join the <a href={meet}>Google Meet</a> at 7:25pm</p>
+        <p>7:25pm – 7:35pm PST: Learn about Able Bodied and the BORP summer cycling program (<a href="https://docs.google.com/presentation/d/1G-N51yIjaYZeli1v7cW7nU8CebIY2ew36yehZ87I03w/edit?usp=sharing">slides</a>)</p>
+        <p>7:35pm – 8:00pm PST: Adaptive sports trivia night (<a href="https://kahoot.it/?pin=132767&refer_method=link">click to join Kahoot</a>)</p>
+        <p>Follow us on <a href="http://www.youtube.com/@AbleBodiedOrg">Youtube</a>, <a href="https://www.facebook.com/AbleBodiedOrg">Facebook</a>, <a href="https://www.instagram.com/ablebodiedorg/">Instagram</a>, and/or <a href="https://www.tiktok.com/@ablebodiedorg">TikTok</a></p>
+        <p><a href="/borp/">Sign up for a BORP ride</a></p>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .schedule {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
-  .schedule th,
-  .schedule td {
-    text-align: left;
-    vertical-align: top;
-    padding: 10px 8px;
-    border-bottom: 1px solid var(--line);
-  }
-  .schedule th {
-    white-space: nowrap;
-    color: var(--ink-2);
-    font-weight: 600;
+  .sub {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
   }
 </style>

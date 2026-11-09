@@ -1,6 +1,7 @@
 ---
 title: "2025 in review: Able Bodied feeling more official!"
 date: 2025-11-14
+author: "Wojtek Poppe"
 slug: "2025-in-review-able-bodied-feeling-more-official"
 categories: ["uncategorized"]
 cover: "/wp-content/uploads/2025/11/Screenshot-2025-11-14-at-7.49.35-AM.png"

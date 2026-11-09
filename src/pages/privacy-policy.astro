@@ -1,54 +1,68 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../lib/site';
-const contact = `mailto:${SITE.email}?subject=${encodeURIComponent('Privacy request')}`;
+// Word for word as on the WordPress page (last changed there 2026-10-09).
 ---
 
 <Base title="Privacy Policy">
   <section class="section">
-    <div class="narrow prose">
-      <h1>Privacy policy</h1>
-      <p>Able Bodied (“we,” “us,” or “our”) is a nonprofit organization dedicated to helping people around the world connect and experience “able bodied” adventures. We value your privacy, especially that of the children and families we serve.</p>
-
-      <h2>1. How we collect information</h2>
+    <div class="wrap prose policy">
+      <h1>PRIVACY POLICY: Able Bodied Inc</h1>
+      <h2><b>AbleBodied</b> (“we,” “us,” or “our”) is a non-profit organization dedicated to helping people around the world connect and experience “Able Bodied” adventures. We value your privacy, especially regarding the children and families we serve.</h2>
+      <h3>1. How We Collect Information</h3>
+      <p>We collect information in the following ways:</p>
       <ul>
-        <li><strong>Directly from you:</strong> when you apply for a program, make a donation, or contact us.</li>
-        <li><strong>From parents and guardians:</strong> we collect information about riders under 13 only when a parent or legal guardian provides it during registration.</li>
-        <li><strong>This website:</strong> the site sets no cookies and uses no tracking or advertising tools. Forms and calendars we link to (Google Forms and Google Calendar) are run by Google under its own privacy policy.</li>
+        <li><p><b>Directly from you:</b> When you apply for a program, make a donation, or contact us.</p></li>
+        <li><p><b>From Parents/Guardians:</b> We collect information about riders under 13 only when provided directly by a parent or legal guardian during registration.</p></li>
+        <li><p><b>Automated Technologies:</b> We use cookies to improve website performance. We do not use behavioral tracking for users known to be under 13.</p></li>
+        <li>
+          <p><b>Text Messaging (SMS): </b>The SCI Club</p>
+          <p>Able Bodied Inc. operates The SCI Club (https://thesciclub.com), a private community app for adults living with spinal cord injury. The SCI Club sends one-time sign-in codes by text message, only when a member asks for one. Message frequency: one text each time you request a sign-in code. Message and data rates may apply. Text HELP for help or STOP to opt out.</p>
+          <p><b>We do not share, sell, or provide your mobile phone number or messaging consent data to third parties or affiliates for marketing or promotional purposes. Text messaging opt-in data and consent will not be shared with any third parties.</b></p>
+          <p>The SCI Club’s full privacy policy is at https://thesciclub.com/privacy.</p>
+        </li>
       </ul>
-
-      <h2>2. Information we collect</h2>
+      <h3>2. Information We Collect</h3>
       <ul>
-        <li><strong>Identifying information:</strong> name, email and contact details.</li>
-        <li><strong>Rider information:</strong> for program safety and eligibility, we may collect age, physical requirements and equipment needs.</li>
-        <li><strong>Financial information:</strong> processed by secure third-party payment services for donations or fees. We never see your full card details.</li>
+        <li><p><b>Identifying Information:</b> Name, email, and contact details.</p></li>
+        <li><p><b>Rider-Specific Data:</b> For program safety and eligibility, we may collect age, physical requirements, and equipment needs.</p></li>
+        <li><p><b>Financial Data:</b> Processed via secure third-party vendors for donations or fees.</p></li>
       </ul>
-
-      <h2>3. Children’s privacy</h2>
-      <p>In accordance with COPPA, we do not knowingly collect personal information directly from children under 13.</p>
+      <h3>3. Notice Regarding Children’s Privacy</h3>
+      <p>In accordance with <a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa">COPPA</a>, we do not knowingly collect personal information directly from children under 13.</p>
       <ul>
-        <li><strong>Parental consent:</strong> all information about a minor must be submitted by a parent or guardian. By submitting an application for a rider under 13, you confirm that you are the legal guardian and consent to our processing of this information.</li>
-        <li><strong>Data minimization:</strong> we only collect the information a child needs to take part in Able Bodied programs.</li>
-        <li><strong>Parental rights:</strong> parents may review their child’s information, ask us to delete it, or refuse further collection by <a href={contact}>contacting us</a>.</li>
+        <li><p><b>Parental Consent:</b> All information regarding a minor must be submitted by a parent or guardian. By submitting an application for a rider under 13, you represent that you are the legal guardian and consent to our processing of this data.</p></li>
+        <li><p><b>Data Minimization:</b> We only collect the information necessary for the child to participate in AbleBodied programs.</p></li>
+        <li><p><b>Parental Rights:</b> Parents may review their child’s information, request its deletion, or refuse further collection by <a href="mailto:info@ablebodied.org">Contacting Us</a>.</p></li>
       </ul>
-
-      <h2>4. How we use and share information</h2>
-      <p>We use this information to run our programs and coordinate events.</p>
+      <h3>4. How We Use and Share Information</h3>
+      <p>We use this data to run our programs and coordinate events.</p>
       <ul>
-        <li><strong>Sharing:</strong> we may share information with program instructors or vetted volunteers as needed for safety.</li>
-        <li><strong>No sale of data:</strong> we do not sell or rent personal information to anyone.</li>
+        <li><p><b>Sharing:</b> We may share information with program instructors or vetted volunteers as needed for safety. When a member of The SCI Club chooses Going for an event, the organization hosting it receives that member’s phone number, for that event only. Hosts may not use it for marketing, fundraising or promotional purposes, or pass it on.</p></li>
+        <li><p><b>No Sale of Data:</b> We do not sell or rent personal information to third parties.</p></li>
       </ul>
-
-      <h2>5. Security</h2>
-      <p>We maintain reasonable administrative and technical safeguards, such as encryption and access limits, to protect the information of our riders and donors.</p>
-
-      <h2>6. Contact us</h2>
-      <p>To ask for access to, or deletion of, your (or your child’s) information, contact:</p>
-      <p>
-        {SITE.mailingAddress.map((l) => <>{l}<br /></>)}
-        <a href={contact}>{SITE.email}</a><br />
-        408-890-SKIN
-      </p>
+      <h3>5. Security</h3>
+      <p>We maintain reasonable administrative and technical safeguards (such as encryption and access limitations) to protect the sensitive information of our riders and donors.</p>
+      <h3>6. Contact Us</h3>
+      <p>To request access to or deletion of your (or your child’s) data, please contact:</p>
+      <p><b>Able Bodied Inc</b></p>
+      <p>Mailing Address: 1968 S. Coast Hwy #3742 Laguna Beach, CA 92651</p>
+      <p>info@ablebodied.org</p>
+      <p>408-890-SKIN</p>
     </div>
   </section>
 </Base>
+
+<style>
+  .policy h1 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .policy h2 {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .policy h3 {
+    font-size: 20px;
+  }
+</style>

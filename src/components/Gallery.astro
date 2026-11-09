@@ -1,0 +1,158 @@
+---
+/**
+ * Photo carousel like the WordPress one: three photos at a time on wide
+ * screens, one on phones, arrows and dots, moving on every 5 seconds unless
+ * someone is hovering, using it, or has asked for less motion.
+ */
+import Pic from './Pic.astro';
+
+interface Props {
+  photos: readonly { src: string; caption: string }[];
+  label: string;
+}
+
+const { photos, label } = Astro.props;
+---
+
+<div class="carousel" data-carousel aria-roledescription="carousel" aria-label={label}>
+  <ul class="track" tabindex="0">
+    {
+      photos.map((p, i) => (
+        <li aria-roledescription="slide" aria-label={`${i + 1} of ${photos.length}`}>
+          <figure>
+            <Pic src={p.src} alt={p.caption} sizes="(min-width: 768px) 380px, 100vw" />
+            {p.caption && <figcaption>{p.caption}</figcaption>}
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+  <button type="button" class="arrow prev" aria-label="Previous photos">‹</button>
+  <button type="button" class="arrow next" aria-label="Next photos">›</button>
+  <div class="dots" aria-hidden="true"></div>
+</div>
+
+<style>
+  .carousel {
+    position: relative;
+    padding: 0 0 30px;
+  }
+  .track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 20px) / 3);
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .track {
+      grid-auto-columns: 100%;
+    }
+  }
+  .track li {
+    scroll-snap-align: start;
+  }
+  figure {
+    margin: 0;
+  }
+  figure :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  figcaption {
+    text-align: center;
+    color: var(--body);
+    font-size: 15px;
+    margin-top: 6px;
+  }
+  .arrow {
+    position: absolute;
+    top: calc(50% - 30px);
+    transform: translateY(-50%);
+    width: 40px;
+    height: 56px;
+    border: 0;
+    background: rgb(0 0 0 / 0.25);
+    color: #fff;
+    font-size: 36px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .arrow:hover {
+    background: rgb(0 0 0 / 0.45);
+  }
+  .prev {
+    left: 0;
+  }
+  .next {
+    right: 0;
+  }
+  .dots {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .dots :global(span) {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #000;
+    opacity: 0.2;
+  }
+  .dots :global(span.on) {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-carousel]')) {
+    const track = root.querySelector<HTMLElement>('.track')!;
+    const slides = [...track.children] as HTMLElement[];
+    const dots = root.querySelector<HTMLElement>('.dots')!;
+    const step = () => slides[0]!.getBoundingClientRect().width + 10;
+    const perView = () => Math.max(1, Math.round(track.clientWidth / step()));
+    const pages = () => Math.max(1, slides.length - perView() + 1);
+    const index = () => Math.round(track.scrollLeft / step());
+    const go = (i: number) => {
+      const n = pages();
+      track.scrollTo({ left: (((i % n) + n) % n) * step() });
+    };
+    const drawDots = () => {
+      dots.replaceChildren(...Array.from({ length: pages() }, (_, i) => {
+        const d = document.createElement('span');
+        if (i === index()) d.className = 'on';
+        return d;
+      }));
+    };
+    root.querySelector('.prev')!.addEventListener('click', () => go(index() - 1));
+    root.querySelector('.next')!.addEventListener('click', () => go(index() + 1));
+    track.addEventListener('scroll', () => requestAnimationFrame(drawDots), { passive: true });
+    addEventListener('resize', drawDots);
+    drawDots();
+
+    let paused = false;
+    root.addEventListener('mouseenter', () => (paused = true));
+    root.addEventListener('mouseleave', () => (paused = false));
+    root.addEventListener('focusin', () => (paused = true));
+    root.addEventListener('focusout', () => (paused = false));
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(() => {
+        if (!paused && !document.hidden) go(index() + 1);
+      }, 5000);
+    }
+  }
+</script>

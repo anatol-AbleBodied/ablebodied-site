@@ -2,10 +2,15 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
 
+/** Category names as WordPress showed them. */
 export const CATEGORIES: Record<string, string> = {
   events: 'Events',
-  'handcycle-conversions': 'Handcycle conversions',
+  'handcycle-conversions': 'Handcycle Conversions',
+  uncategorized: 'Uncategorized',
 };
+
+/** Categories with their own page (/category/<slug>/). */
+export const CATEGORY_PAGES = ['events', 'handcycle-conversions'];
 
 /** Published posts, newest first. */
 export async function allPosts(): Promise<Post[]> {
@@ -31,6 +36,15 @@ export function postUrl(post: Post): string {
   return `/${p.year}/${p.month}/${p.day}/${p.slug}/`;
 }
 
-export function longDate(d: Date): string {
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+/** The first ~55 words of a post, like WordPress's excerpt. */
+export function excerpt(post: Post, words = 55): string {
+  const plain = (post.body ?? '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_>`|-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const list = plain.split(' ');
+  return list.length > words ? `${list.slice(0, words).join(' ')} …` : plain;
 }

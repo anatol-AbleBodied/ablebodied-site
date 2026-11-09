@@ -1,18 +1,21 @@
 /** Facts about Able Bodied Inc. used across the site. Change them here once. */
 export const SITE = {
   name: 'Able Bodied Inc.',
-  tagline: '“Able bodied” experiences for all',
+  /** The home page's title, as on the WordPress site. */
+  homeTitle:
+    'Able Bodied Experiences for ALL. We are a California non-profit and we offer free electric assist handcycling lessons and resources in San Jose CA',
   description:
-    'Able Bodied Inc. is a California nonprofit offering free electric-assist handcycling lessons, mentoring and resources in San Jose and Sebastopol, CA, and online.',
+    'Able Bodied Inc. is a California non-profit offering free electric assist handcycling lessons and resources in San Jose and Sebastopol, CA, and online.',
   email: 'info@ablebodied.org',
   donateEmail: 'donate@ablebodied.org',
   ein: '99-3439521',
   mailingAddress: ['Able Bodied Inc.', '1968 S. Coast Hwy #3742', 'Laguna Beach, CA 92651'],
   wiki: 'https://wiki.ablebodied.org',
-  shareImage: '/img/2022/04/IMG_5348-scaled-1600.webp',
+  shareImage: '/wp-content/uploads/2024/06/Monster-All-Wheel-Drive-Handcycle.jpg',
+  facebookPage: 'https://www.facebook.com/profile.php?id=61560849573322',
   social: [
     { label: 'YouTube', href: 'https://www.youtube.com/@AbleBodiedOrg' },
-    { label: 'Facebook', href: 'https://www.facebook.com/AbleBodiedOrg' },
+    { label: 'Facebook', href: 'https://www.facebook.com/AbleBodiedOrg/' },
     { label: 'Instagram', href: 'https://www.instagram.com/ablebodiedorg/' },
     { label: 'TikTok', href: 'https://www.tiktok.com/@ablebodiedorg' },
   ],

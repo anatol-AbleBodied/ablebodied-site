@@ -1,7 +1,9 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../../../layouts/Base.astro';
-import { allPosts, CATEGORIES, longDate, postParts, postUrl, type Post } from '../../../../lib/posts';
+import Pic from '../../../../components/Pic.astro';
+import PostMeta from '../../../../components/PostMeta.astro';
+import { allPosts, postParts, postUrl, type Post } from '../../../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await allPosts();
@@ -19,74 +21,35 @@ interface Props {
 
 const { post, newer, older } = Astro.props;
 const { Content } = await render(post);
-const { title, date, categories, cover, description } = post.data;
-const shown = categories.filter((c) => CATEGORIES[c]);
+const { title, cover, description } = post.data;
 ---
 
-<Base title={title} description={description} image={cover ? cover : undefined} type="article">
-  <article class="section">
-    <div class="narrow">
-      <p class="meta">
-        <a href="/blog/">News</a> ·
-        <time datetime={date.toISOString().slice(0, 10)}>{longDate(date)}</time>
-        {shown.map((c) => <> · <a href={`/category/${c}/`}>{CATEGORIES[c]}</a></>)}
-      </p>
-      <h1>{title}</h1>
-      <div class="prose">
-        <Content />
-      </div>
-
-      <nav class="pager" aria-label="More posts">
-        {older ? <a href={postUrl(older)} rel="prev"><span>Older</span>{older.data.title}</a> : <span></span>}
-        {newer && <a href={postUrl(newer)} rel="next" class="next"><span>Newer</span>{newer.data.title}</a>}
+<Base title={title} description={description} image={cover} type="article">
+  <div class="boxed">
+    <div class="wrap">
+      <article class="entry">
+        {cover && <div class="entry-cover"><Pic src={cover} alt="" sizes="(min-width: 1240px) 1110px, 100vw" eager /></div>}
+        <h1 class="entry-title">{title}</h1>
+        <PostMeta post={post} />
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+      <nav class="entry post-nav" aria-label="Posts">
+        {older ? <a href={postUrl(older)} rel="prev">← Previous Post</a> : <span></span>}
+        {newer && <a href={postUrl(newer)} rel="next">Next Post →</a>}
       </nav>
-
-      <aside class="support">
-        <h2>Support riders like these</h2>
-        <p>Able Bodied Inc. is a 501(c)(3) nonprofit. Donations are tax-deductible.</p>
-        <a class="btn accent" href="/donate/">Donate</a>
-      </aside>
     </div>
-  </article>
+  </div>
 </Base>
 
 <style>
-  .meta {
-    color: var(--ink-2);
-    font-size: 0.95rem;
+  .post-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 25px;
   }
-  .pager {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-  }
-  .pager a {
+  .post-nav a {
     text-decoration: none;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .pager a:hover {
-    color: var(--link);
-  }
-  .pager span {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--ink-2);
-  }
-  .pager .next {
-    text-align: right;
-  }
-  .support {
-    margin-top: 40px;
-    padding: 24px;
-    border-radius: var(--radius);
-    background: var(--brand-soft);
-  }
-  .support h2 {
-    font-size: 1.35rem;
   }
 </style>

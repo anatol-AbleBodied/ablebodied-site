@@ -1,6 +1,7 @@
 ---
 title: "In 2026 you can deduct your donations even if you take the standard deduction"
 date: 2026-02-28
+author: "Wojtek Poppe"
 slug: "in-2026-you-can-deduct-your-donations-even-if-you-take-the-standard-deduction"
 categories: ["uncategorized"]
 description: "If you take the standard deduction, you can now deduct up to $1,000 if single and $2,000 if married and filing jointly (article). This means you can effect"
