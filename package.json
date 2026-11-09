@@ -1,7 +1,7 @@
 {
   "name": "ablebodied-site",
   "private": true,
-  "description": "ablebodied.org — Able Bodied Inc.'s website, built as static pages for Netlify",
+  "description": "ablebodied.org — Able Bodied Inc.'s website, built as static pages for GitHub Pages",
   "type": "module",
   "engines": {
     "node": ">=22"

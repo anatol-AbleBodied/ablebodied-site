@@ -1,7 +1,8 @@
 # ablebodied.org
 
 The website of Able Bodied Inc., built with [Astro](https://astro.build) as
-plain pages and published on Netlify. It replaces the WordPress site; every
+plain pages and published on GitHub Pages: every push to `main` rebuilds and
+publishes the site (`.github/workflows/deploy.yml`). It replaces the WordPress site; every
 old address (pages, posts, images under `/wp-content/uploads/`) still works.
 
 ## Add a news post
@@ -33,10 +34,16 @@ Set `draft: true` in the front matter to keep a post off the site.
 Pages are in `src/pages/` (`index.astro` is the home page). Contact details,
 donation links and scheduling links are in `src/lib/site.ts`.
 
+## Old addresses
+
+Redirects for old WordPress addresses live in `astro.config.mjs` under
+`redirects`. GitHub Pages has no server redirects, so each one is a small page
+that forwards the visitor. `public/CNAME` tells GitHub Pages the domain.
+
 ## Run it on your computer
 
 ```bash
 pnpm install
 pnpm dev        # http://localhost:4321
-pnpm build      # makes dist/, what Netlify publishes
+pnpm build      # makes dist/, what GitHub Pages publishes
 ```
