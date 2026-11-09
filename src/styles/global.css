@@ -9,8 +9,8 @@
   --text: #757575; /* body text (the WordPress grey #7a7a7a, a hair darker so it passes contrast on white) */
   --dark: #3a3a3a; /* dark headings */
   --body: #4b4f58; /* site title, captions */
-  --green: #267f36; /* buttons (live site: #61ce70, darkened so white text reads) */
-  --cyan: #007a99; /* the big "Book a FREE Lesson" button (live site: #00c0e4) */
+  --green: #61ce70; /* buttons */
+  --cyan: #00c0e4; /* the big "Book a FREE Lesson" button */
   --band: #eaeaea; /* grey sections */
   --page: #f5f5f5; /* behind blog posts */
   --line: rgb(0 0 0 / 0.15);
