@@ -61,8 +61,7 @@ const nav = [
     <header class="site-header">
       <div class="bar">
         <a href="/" class="brand" rel="home">
-          <img src="/logo.jpg" alt="" width="180" height="62" />
-          <span class="site-title">{SITE.name}</span>
+          <img src="/logo.jpg" alt={`${SITE.name} home`} width="180" height="62" />
         </a>
         <details class="menu">
           <summary aria-label="Main menu"><span class="burger" aria-hidden="true"></span></summary>
@@ -110,24 +109,9 @@ const nav = [
     width: 180px;
     height: auto;
   }
-  .site-title {
-    font-family: var(--system);
-    font-size: 35px;
-    font-weight: 600;
-    color: var(--body);
-    white-space: nowrap;
-  }
   @media (max-width: 921px) {
     .brand img {
       width: 120px;
-    }
-    .site-title {
-      font-size: 24px;
-    }
-  }
-  @media (max-width: 480px) {
-    .site-title {
-      display: none;
     }
   }
   .menu summary {
