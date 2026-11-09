@@ -1,0 +1,7 @@
+packages:
+  - '.'
+# esbuild and sharp ship ready-made binaries for each platform; their install
+# scripts only double-check them, so they stay off.
+allowBuilds:
+  esbuild: false
+  sharp: false

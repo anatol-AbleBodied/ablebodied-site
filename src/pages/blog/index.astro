@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { allPosts, CATEGORIES } from '../../lib/posts';
+
+const posts = await allPosts();
+---
+
+<Base title="News" description="News, events and handcycle builds from Able Bodied Inc.">
+  <section class="section">
+    <div class="wrap">
+      <h1>News and events</h1>
+      <p class="lead">
+        Rides, events, handcycle builds and updates from Able Bodied.
+        {Object.entries(CATEGORIES).map(([slug, label]) => <> <a href={`/category/${slug}/`}>{label}</a> ·</>)}
+        <a href="/rss.xml">RSS feed</a>
+      </p>
+      <div class="grid">
+        {posts.map((p) => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+</Base>

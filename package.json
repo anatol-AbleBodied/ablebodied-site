@@ -1,0 +1,25 @@
+{
+  "name": "ablebodied-site",
+  "private": true,
+  "description": "ablebodied.org — Able Bodied Inc.'s website, built as static pages for Netlify",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@12.18.0",
+  "scripts": {
+    "images": "node scripts/images.mjs",
+    "dev": "node scripts/images.mjs && astro dev",
+    "build": "node scripts/images.mjs && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.18.2",
+    "sharp": "0.34.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "~0.9.12",
+    "typescript": "^5.9.3"
+  }
+}

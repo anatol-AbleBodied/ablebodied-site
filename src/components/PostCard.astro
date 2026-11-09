@@ -1,0 +1,52 @@
+---
+import Pic from './Pic.astro';
+import { longDate, postUrl, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, date, cover, description } = post.data;
+---
+
+<article class="card post-card">
+  {cover && <Pic src={cover} alt="" />}
+  <div class="card-body">
+    <p class="date"><time datetime={date.toISOString().slice(0, 10)}>{longDate(date)}</time></p>
+    <h3><a href={postUrl(post)}>{title}</a></h3>
+    {description && <p class="excerpt">{description}…</p>}
+  </div>
+</article>
+
+<style>
+  .post-card {
+    position: relative;
+  }
+  .post-card h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  /* The whole card opens the post; the title link stays the one link read out. */
+  .post-card h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .post-card:hover h3 a {
+    text-decoration: underline;
+  }
+  .post-card:focus-within {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .date {
+    color: var(--ink-2);
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+  .excerpt {
+    color: var(--ink-2);
+    margin: 0;
+  }
+</style>

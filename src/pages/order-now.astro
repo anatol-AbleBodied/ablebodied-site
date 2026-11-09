@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Able Bodied Ambassadors" description="Map of Able Bodied ambassadors around the world.">
+  <section class="section">
+    <div class="wrap">
+      <h1>Map of Able Bodied Ambassadors</h1>
+      <p class="lead">Riders from our <a href="/#get1help2">Get 1 Help 2</a> program who are spreading electric-assist handcycling where they live.</p>
+      <div class="embed">
+        <iframe
+          src="https://www.google.com/maps/d/embed?mid=1Nup-SD8aUK2cWOqI4SH2KJ4qbg5wvT0&hl=en&ehbc=2E312F"
+          title="Map of Able Bodied ambassadors"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .embed iframe {
+    min-height: 560px;
+  }
+</style>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ablebodied",
+      "runtimeExecutable": "/Users/wojtekpoppe/.local/bin/pnpm",
+      "runtimeArgs": ["exec", "astro", "preview", "--port", "4329"],
+      "port": 4329
+    }
+  ]
+}

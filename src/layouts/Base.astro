@@ -1,0 +1,296 @@
+---
+import '../styles/global.css';
+import { SITE } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** An uploaded photo to show when the page is shared. */
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description = SITE.description, image = SITE.shareImage, type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} – ${SITE.name}` : `${SITE.name} – ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const shareImage = new URL(image, Astro.site);
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: '/#lessons', label: 'Free lessons' },
+  { href: '/#get1help2', label: 'Get 1 Help 2' },
+  { href: '/borp/', label: 'Group rides' },
+  { href: '/blog/', label: 'News' },
+  { href: '/board-of-directors/', label: 'Our team' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="theme-color" content="#1f5a43" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title ?? SITE.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} news`} href="/rss.xml" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a href="/" class="logo" aria-label={`${SITE.name} home`}>
+          <img src="/logo.jpg" alt="" width="180" height="62" />
+        </a>
+        <details class="menu">
+          <summary><span class="visually-hidden">Menu</span><span aria-hidden="true" class="burger"></span></summary>
+          <nav aria-label="Main">
+            <ul>
+              {
+                nav.map((item) => (
+                  <li>
+                    <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+              <li><a class="btn accent" href="/donate/">Donate</a></li>
+            </ul>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <p class="foot-name">{SITE.name}</p>
+          <p>“Able bodied” experiences for all: free electric-assist handcycling lessons, mentoring and open resources.</p>
+          <p>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+            San Jose and Sebastopol, CA · by appointment only
+          </p>
+        </div>
+        <div>
+          <p class="foot-name">Follow us</p>
+          <ul class="foot-links">
+            {SITE.social.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="foot-name">More</p>
+          <ul class="foot-links">
+            <li><a href="/donate/">Donate</a></li>
+            <li><a href="/reserve/">Reserve a handcycle</a></li>
+            <li><a href={SITE.wiki}>Handcycle wiki</a></li>
+            <li><a href="/privacy-policy/">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap legal">
+        <p>
+          {SITE.name} is a nonprofit, tax-exempt charitable organization (tax ID {SITE.ein}) under Section 501(c)(3)
+          of the Internal Revenue Code. Donations are tax-deductible as allowed by law.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 72px;
+  }
+  .logo img {
+    height: 48px;
+    width: auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 2px 6px;
+  }
+  .menu summary {
+    list-style: none;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+  }
+  .menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .burger,
+  .burger::before,
+  .burger::after {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    position: relative;
+  }
+  .burger::before,
+  .burger::after {
+    content: '';
+    position: absolute;
+  }
+  .burger::before {
+    top: -7px;
+  }
+  .burger::after {
+    top: 7px;
+  }
+  .menu[open] .burger {
+    background: transparent;
+  }
+  .menu[open] .burger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  .menu[open] .burger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+  .menu nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 16px 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .menu li a:not(.btn) {
+    display: block;
+    padding: 12px 4px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .menu li a[aria-current='page'] {
+    color: var(--brand);
+  }
+  .menu .btn {
+    margin-top: 12px;
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .menu summary {
+      display: none;
+    }
+    /* Wide screens: the menu is always shown, whatever the details state. */
+    .menu > nav {
+      position: static;
+      display: block;
+      background: none;
+      border: 0;
+      box-shadow: none;
+    }
+    .menu ul {
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+    }
+    .menu li a:not(.btn) {
+      border: 0;
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+    .menu li a:not(.btn):hover {
+      background: var(--surface-2);
+    }
+    .menu .btn {
+      margin: 0 0 0 8px;
+      width: auto;
+    }
+  }
+
+  .site-footer {
+    background: #16251e;
+    color: #dfe7e2;
+    padding: 48px 0 24px;
+    margin-top: 0;
+  }
+  .site-footer a {
+    color: #a8e0c4;
+  }
+  .foot {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .foot-name {
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .foot-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .foot-links li {
+    margin-bottom: 6px;
+  }
+  .legal {
+    border-top: 1px solid #2f4339;
+    margin-top: 28px;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #b6c4bc;
+  }
+</style>
+
+<script is:inline>
+  // On wide screens the menu is a plain row; keep the <details> open so it
+  // shows. On phones it starts closed and closes after a choice.
+  (() => {
+    const menu = document.querySelector('.menu');
+    if (!menu) return;
+    const wide = matchMedia('(min-width: 900px)');
+    const sync = () => { menu.open = wide.matches; };
+    sync();
+    wide.addEventListener('change', sync);
+    menu.addEventListener('click', (e) => {
+      if (!wide.matches && e.target instanceof HTMLAnchorElement) menu.open = false;
+    });
+  })();
+</script>

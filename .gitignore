@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+.DS_Store
+.env
+.env.*
+# Made by scripts/images.mjs on every build.
+public/img/
+src/data/images.json
