@@ -29,4 +29,4 @@ buy the kit on Ali Express, which can be a
 
   
 
-Work in progress… (e-mail Anatol at anatolpoppe@gmail.com if you want this entry finished)
+Work in progress… (e-mail us at info@ablebodied.org if you want this entry finished)

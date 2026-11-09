@@ -17,4 +17,4 @@ This handcycle was built using Grin’s ready to roll kit. The full parts list w
 
 ![](/wp-content/uploads/2024/01/Screenshot-2024-01-09-at-7.56.45-PM-300x198.png). ![](/wp-content/uploads/2024/01/Screenshot-2024-01-09-at-7.56.27-PM-300x280.png)
 
-More coming soon (e-mail Anatol at anatolpoppe@gmail.com if you want this entry finished)
+More coming soon (e-mail us at info@ablebodied.org if you want this entry finished)
