@@ -45,6 +45,16 @@ const nav = [
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     <slot name="head" />
+    <!-- Google Analytics: the same Google tag WordPress Site Kit used, so the stats carry on. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NNXJQHK"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'GT-NNXJQHK');
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
