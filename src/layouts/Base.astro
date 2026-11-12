@@ -2,6 +2,7 @@
 import '@fontsource-variable/roboto/index.css';
 import '../styles/global.css';
 import { SITE } from '../lib/site';
+import Social from '../components/Social.astro';
 
 interface Props {
   title?: string;
@@ -79,10 +80,21 @@ const nav = [
     </main>
 
     <footer class="site-footer">
-      <address>
-        Mailing Address: Able Bodied Inc., 1968 S. Coast Hwy #3742, Laguna Beach, CA 92651
-      </address>
-      <p>Copyright © {year} {SITE.name}</p>
+      <div class="wrap">
+        <div class="boxes">
+          <div><h5>E-mail Us</h5><p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p></div>
+          <div><h5>Our Locations</h5><p>San Jose, CA 95124<br />Sebastopol CA</p></div>
+          <div><h5>Open Hours</h5><p>By appointment only</p></div>
+          <div><h5>Follow Us</h5><Social /></div>
+        </div>
+        <hr class="divider" />
+        <div class="legal">
+          <p><b>{SITE.name}</b> is a nonprofit, tax-exempt charitable organization (tax ID number {SITE.ein}) under Section 501(c)(3) of the Internal Revenue Code. Donations are tax-deductible as allowed by law.</p>
+          <address>Mailing Address: {SITE.mailingAddress.join(', ')}</address>
+          <p><a href="/privacy-policy/">Privacy Policy</a></p>
+        </div>
+      </div>
+      <p class="copyright">Copyright © {year} {SITE.name}</p>
     </footer>
   </body>
 </html>
@@ -206,18 +218,55 @@ const nav = [
   }
   .site-footer {
     border-top: 1px solid #dddddd;
-    text-align: center;
-    padding: 20px;
+    padding-top: 40px;
     font-size: 15px;
     color: var(--body);
     background: #fff;
   }
-  .site-footer p {
+  .boxes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+  @media (max-width: 767px) {
+    .boxes {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 30px;
+    }
+  }
+  .boxes h5 {
+    color: var(--blue);
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .boxes p {
+    color: var(--text);
     margin: 0;
   }
-  .site-footer address {
+  .boxes a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .site-footer .divider {
+    margin: 30px 0 20px;
+  }
+  .legal {
+    color: var(--text);
+  }
+  .legal b {
+    color: var(--body);
+  }
+  .legal p,
+  .legal address {
+    margin: 0 0 1em;
     font-style: normal;
-    margin: 0 0 6px;
+  }
+  .copyright {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #dddddd;
   }
 </style>
 
